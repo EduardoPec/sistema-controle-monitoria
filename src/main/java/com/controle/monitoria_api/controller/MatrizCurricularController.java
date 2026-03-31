@@ -17,7 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/matrizes")
+@RequestMapping("/matrizes-curriculares")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class MatrizCurricularController {

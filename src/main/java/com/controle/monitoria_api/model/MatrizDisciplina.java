@@ -1,6 +1,7 @@
 package com.controle.monitoria_api.model;
 
 import com.controle.monitoria_api.model.dto.request.MatrizDisciplinaAtualizacaoDTO;
+import com.controle.monitoria_api.model.dto.request.MatrizDisciplinaCriacaoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -38,6 +39,14 @@ public class MatrizDisciplina {
             inverseJoinColumns = @JoinColumn(name = "pre_requisitos_id")
     )
     private List<Disciplina> preRequisitos = new ArrayList<>();
+
+    public MatrizDisciplina(MatrizDisciplinaCriacaoDTO dto, MatrizCurricular matrizCurricular, Disciplina disciplina, List<Disciplina> preRequisitos) {
+        this.matrizCurricular = matrizCurricular;
+        this.disciplina = disciplina;
+        if (preRequisitos != null) {
+            this.preRequisitos = preRequisitos;
+        }
+    }
 
     public MatrizDisciplina(MatrizDisciplinaAtualizacaoDTO dto, MatrizCurricular matrizCurricular, Disciplina disciplina, List<Disciplina> preRequisitos) {
         this.matrizCurricular = matrizCurricular;
