@@ -1,7 +1,7 @@
 package com.controle.monitoria_api.controller;
 
 import com.controle.monitoria_api.model.dto.request.IESAtualizacaoDTO;
-import com.controle.monitoria_api.model.dto.request.IESRequestDTO;
+import com.controle.monitoria_api.model.dto.request.IESCriacaoDTO;
 import com.controle.monitoria_api.model.dto.response.IESResponseDTO;
 import com.controle.monitoria_api.service.IESService;
 import jakarta.validation.Valid;
@@ -25,7 +25,7 @@ public class IESController {
     private final IESService service;
 
     @PostMapping
-    public ResponseEntity<IESResponseDTO> criar(@Valid @RequestBody IESRequestDTO dto) {
+    public ResponseEntity<IESResponseDTO> criar(@Valid @RequestBody IESCriacaoDTO dto) {
         var ies = service.criar(dto);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()

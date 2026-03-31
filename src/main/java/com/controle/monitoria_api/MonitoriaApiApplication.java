@@ -9,5 +9,4 @@ public class MonitoriaApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MonitoriaApiApplication.class, args);
 	}
-
 }
