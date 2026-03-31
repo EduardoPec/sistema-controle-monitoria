@@ -1,7 +1,7 @@
 package com.controle.monitoria_api.model;
 
 import com.controle.monitoria_api.model.dto.request.IESAtualizacaoDTO;
-import com.controle.monitoria_api.model.dto.request.IESRequestDTO;
+import com.controle.monitoria_api.model.dto.request.IESCriacaoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -39,10 +39,14 @@ public class IES {
     @OneToMany(mappedBy = "ies")
     private List<Escola> escolas = new ArrayList<>();
 
-    public IES(IESRequestDTO dto) {
+    public IES(IESCriacaoDTO dto) {
         this.nome = dto.nome();
         this.endereco = dto.endereco();
         this.telefone = dto.telefone();
+    }
+
+    @PrePersist
+    public void prePersist() {
         this.dataCadastro = LocalDateTime.now();
     }
 

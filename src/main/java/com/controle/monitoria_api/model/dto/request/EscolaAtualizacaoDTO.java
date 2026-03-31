@@ -2,10 +2,10 @@ package com.controle.monitoria_api.model.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 
-public record IESAtualizacaoDTO(
+public record EscolaAtualizacaoDTO(
         @NotNull(message = "ID é obrigatório!")
         Long id,
         String nome,
-        String endereco,
-        String telefone) {
+        String coordenador,
+        Long iesId) {
 }

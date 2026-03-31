@@ -3,7 +3,7 @@ package com.controle.monitoria_api.service;
 import com.controle.monitoria_api.exceptions.ValidacaoException;
 import com.controle.monitoria_api.model.IES;
 import com.controle.monitoria_api.model.dto.request.IESAtualizacaoDTO;
-import com.controle.monitoria_api.model.dto.request.IESRequestDTO;
+import com.controle.monitoria_api.model.dto.request.IESCriacaoDTO;
 import com.controle.monitoria_api.model.dto.response.IESResponseDTO;
 import com.controle.monitoria_api.repository.IESRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class IESService {
     private final IESRepository repository;
 
     @Transactional
-    public IESResponseDTO criar(IESRequestDTO dto) {
+    public IESResponseDTO criar(IESCriacaoDTO dto) {
         if (repository.existsByNome(dto.nome())) {
             throw new ValidacaoException("IES já cadastrada com este nome!");
         }
@@ -46,8 +46,7 @@ public class IESService {
                 .orElseThrow(() -> new ValidacaoException("IES não encontrada!"));
 
         ies.atualizarInformacoes(dto);
-        var salvar = repository.save(ies);
-        return new IESResponseDTO(salvar);
+        return new IESResponseDTO(ies);
     }
 
     @Transactional
