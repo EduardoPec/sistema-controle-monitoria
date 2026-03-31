@@ -2,16 +2,23 @@ package com.controle.monitoria_api.model.dto.response;
 
 import com.controle.monitoria_api.model.MatrizDisciplina;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public record MatrizDisciplinaResponseDTO(
         Long id,
-        Long disciplinaId,
-        String disciplinaSigla,
-        String disciplinaDescricao,
-        Long preRequisitoId,
-        String preRequisitoSigla
-) {
+        MatrizCurricularResponseDTO matriz,
+        DisciplinaResponseDTO disciplina,
+        List<DisciplinaResponseDTO> preRequisitos) {
 
-    public MatrizDisciplinaResponseDTO(MatrizDisciplina md) { 
-        this(md.getId(), md.getDisciplina().getId(), md.getDisciplina().getSigla(), md.getDisciplina().getDescricao(), md.getPreRequisito() != null ? md.getPreRequisito().getId() : null, md.getPreRequisito() != null ? md.getPreRequisito().getSigla() : null); 
+    public MatrizDisciplinaResponseDTO(MatrizDisciplina matrizDisciplina) {
+        this(
+                matrizDisciplina.getId(),
+                new MatrizCurricularResponseDTO(matrizDisciplina.getMatrizCurricular()),
+                new DisciplinaResponseDTO(matrizDisciplina.getDisciplina()),
+                matrizDisciplina.getPreRequisitos().stream()
+                        .map(DisciplinaResponseDTO::new)
+                        .collect(Collectors.toList())
+        );
     }
 }

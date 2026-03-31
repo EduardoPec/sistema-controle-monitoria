@@ -27,21 +27,21 @@ public class MatrizCurricular {
     @Column(nullable = false, length = 100)
     private String nome;
 
-    @Column(nullable = false, length = 300)
+    @Column(nullable = false, length = 200)
     private String descricao;
 
     @ManyToOne
     @JoinColumn(name = "curso_id", nullable = false)
     private Curso curso;
 
-    @OneToMany(mappedBy = "matrizCurricular", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MatrizDisciplina> matrizDisciplinas = new ArrayList<>();
-
     @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
 
     @Column(nullable = false)
     private Boolean ativo;
+
+    @OneToMany(mappedBy = "matrizCurricular")
+    private List<MatrizDisciplina> matrizDisciplinas = new ArrayList<>();
 
     public MatrizCurricular(MatrizCurricularCriacaoDTO dto, Curso curso) {
         this.nome = dto.nome();

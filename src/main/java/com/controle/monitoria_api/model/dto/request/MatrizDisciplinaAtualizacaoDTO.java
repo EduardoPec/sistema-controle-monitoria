@@ -4,10 +4,10 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
-public record MatrizDisciplinaCriacaoDTO(
-        @NotNull(message = "Matriz é obrigatória!")
+public record MatrizDisciplinaAtualizacaoDTO(
+        @NotNull(message = "ID é obrigatório!")
+        Long id,
         Long matrizId,
-        @NotNull(message = "Disciplina é obrigatória!")
         Long disciplinaId,
         List<Long> preRequisitosIds) {
 }

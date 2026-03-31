@@ -9,14 +9,12 @@ public record MatrizCurricularResponseDTO(
         Long id,
         String nome,
         String descricao,
-        Long cursoId,
-        String cursoDescricao,
-        List<MatrizDisciplinaResponseDTO> disciplinas,
+        CursoResponseDTO curso,
         LocalDateTime dataCadastro,
         Boolean ativo
 ) {
 
     public MatrizCurricularResponseDTO(MatrizCurricular matriz) { 
-        this(matriz.getId(), matriz.getNome(), matriz.getDescricao(), matriz.getCurso().getId(), matriz.getCurso().getDescricao(), matriz.getMatrizDisciplinas().stream().map(MatrizDisciplinaResponseDTO::new).toList(), matriz.getDataCadastro(), matriz.getAtivo()); 
+        this(matriz.getId(), matriz.getNome(), matriz.getDescricao(), new CursoResponseDTO(matriz.getCurso()), matriz.getDataCadastro(), matriz.getAtivo());
     }
 }

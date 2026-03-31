@@ -1,10 +1,14 @@
 package com.controle.monitoria_api.model;
 
+import com.controle.monitoria_api.model.dto.request.MatrizDisciplinaAtualizacaoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "matrizes_disciplinas",
@@ -27,13 +31,32 @@ public class MatrizDisciplina {
     @JoinColumn(name = "disciplina_id", nullable = false)
     private Disciplina disciplina;
 
-    @ManyToOne
-    @JoinColumn(name = "pre_requisito_id")
-    private Disciplina preRequisito;
+    @ManyToMany
+    @JoinTable(
+            name = "matriz_disciplina_pre_requisitos",
+            joinColumns = @JoinColumn(name = "matriz_disciplina_id"),
+            inverseJoinColumns = @JoinColumn(name = "pre_requisitos_id")
+    )
+    private List<Disciplina> preRequisitos = new ArrayList<>();
 
-    public MatrizDisciplina(MatrizCurricular matrizCurricular, Disciplina disciplina, Disciplina preRequisito) {
+    public MatrizDisciplina(MatrizDisciplinaAtualizacaoDTO dto, MatrizCurricular matrizCurricular, Disciplina disciplina, List<Disciplina> preRequisitos) {
         this.matrizCurricular = matrizCurricular;
         this.disciplina = disciplina;
-        this.preRequisito = preRequisito;
+        if (preRequisitos != null) {
+            this.preRequisitos = preRequisitos;
+        }
+    }
+
+    public void atualizarInformacoes(MatrizDisciplinaAtualizacaoDTO dto, MatrizCurricular matriz, Disciplina disciplina, List<Disciplina> preRequisitos) {
+        if (dto.matrizId() != null && matriz != null) {
+            this.matrizCurricular = matriz;
+        }
+        if (dto.disciplinaId() != null && disciplina != null) {
+            this.disciplina = disciplina;
+        }
+        if (preRequisitos != null) {
+            this.preRequisitos.clear();
+            this.preRequisitos.addAll(preRequisitos);
+        }
     }
 }
