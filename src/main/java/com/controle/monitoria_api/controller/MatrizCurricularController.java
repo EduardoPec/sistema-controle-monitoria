@@ -39,47 +39,59 @@ public class MatrizCurricularController {
     @GetMapping
     public ResponseEntity<Page<MatrizCurricularResponseDTO>> listarTodos(
             @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
-        return ResponseEntity.ok(service.listarTodos(paginacao));
+        var page = service.listarTodos(paginacao);
+        return ResponseEntity.ok(page);
     }
 
     @GetMapping("/ativos")
     public ResponseEntity<Page<MatrizCurricularResponseDTO>> listarAtivos(
             @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
-        return ResponseEntity.ok(service.listarAtivos(paginacao));
+        var page = service.listarAtivos(paginacao);
+        return ResponseEntity.ok(page);
     }
 
     @GetMapping("/inativos")
     public ResponseEntity<Page<MatrizCurricularResponseDTO>> listarInativos(
             @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
-        return ResponseEntity.ok(service.listarInativos(paginacao));
+        var page = service.listarInativos(paginacao);
+        return ResponseEntity.ok(page);
     }
 
     @GetMapping("/curso/{cursoId}")
     public ResponseEntity<Page<MatrizCurricularResponseDTO>> listarPorCurso(
             @PathVariable Long cursoId,
             @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
-        return ResponseEntity.ok(service.listarPorCurso(cursoId, paginacao));
+        var page = service.listarPorCurso(cursoId, paginacao);
+        return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/curso/{cursoId}/ativa")
+    public ResponseEntity<MatrizCurricularResponseDTO> buscarMatrizAtivaPorCurso(@PathVariable Long cursoId) {
+        var matriz = service.listarMatrizAtivaPorCurso(cursoId);
+        return ResponseEntity.ok(matriz);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MatrizCurricularResponseDTO> listarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(service.listarPorId(id));
+    public ResponseEntity<MatrizCurricularResponseDTO> buscarPorId(@PathVariable Long id) {
+        var matriz = service.listarPorId(id);
+        return ResponseEntity.ok(matriz);
     }
 
     @PutMapping
     public ResponseEntity<MatrizCurricularResponseDTO> atualizar(@Valid @RequestBody MatrizCurricularAtualizacaoDTO dto) {
-        return ResponseEntity.ok(service.atualizar(dto));
-    }
-
-    @PatchMapping("/{id}/inativar")
-    public ResponseEntity<Void> inativar(@PathVariable Long id) {
-        service.inativar(id);
-        return ResponseEntity.noContent().build();
+        var matriz = service.atualizar(dto);
+        return ResponseEntity.ok(matriz);
     }
 
     @PatchMapping("/{id}/ativar")
     public ResponseEntity<Void> ativar(@PathVariable Long id) {
         service.ativar(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}/inativar")
+    public ResponseEntity<Void> inativar(@PathVariable Long id) {
+        service.inativar(id);
         return ResponseEntity.noContent().build();
     }
 }
