@@ -46,7 +46,7 @@ public class IES {
     }
 
     @PrePersist
-    public void prePersist() {
+    public void onCreate() {
         this.dataCadastro = LocalDateTime.now();
     }
 

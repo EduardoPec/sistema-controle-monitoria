@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class EscolaService {
 
     private final EscolaRepository escolaRepository;
+
     private final IESRepository iesRepository;
 
     @Transactional

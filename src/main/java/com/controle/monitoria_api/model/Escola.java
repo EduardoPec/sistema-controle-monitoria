@@ -46,7 +46,7 @@ public class Escola {
     }
 
     @PrePersist
-    public void prePersist() {
+    public void onCreate() {
         this.dataCadastro = LocalDateTime.now();
     }
     public void atualizarInformacoes(EscolaAtualizacaoDTO dto, IES ies) {
