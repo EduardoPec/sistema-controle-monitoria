@@ -70,15 +70,15 @@ public class EscolaService {
         var escola = escolaRepository.findById(dto.id())
                 .orElseThrow(() -> new ValidacaoException("Escola não encontrada!"));
 
-        IES ies = null;
+        IES novaIes = null;
         if (dto.iesId() != null) {
-            ies = iesRepository.findById(dto.iesId())
+            novaIes = iesRepository.findById(dto.iesId())
                     .orElseThrow(() -> new ValidacaoException("IES não encontrada!"));
         }
 
         validarNomeUnicoNaAtualizacao(dto, escola);
 
-        escola.atualizarInformacoes(dto, ies);
+        escola.atualizarInformacoes(dto, novaIes);
         return new EscolaResponseDTO(escola);
     }
 
