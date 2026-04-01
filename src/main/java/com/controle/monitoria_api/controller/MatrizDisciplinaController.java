@@ -1,7 +1,7 @@
 package com.controle.monitoria_api.controller;
 
-import com.controle.monitoria_api.model.dto.request.MatrizDisciplinaAtualizacaoDTO;
-import com.controle.monitoria_api.model.dto.request.MatrizDisciplinaCriacaoDTO;
+import com.controle.monitoria_api.model.dto.request.matrizDisciplina.MatrizDisciplinaAtualizacaoDTO;
+import com.controle.monitoria_api.model.dto.request.matrizDisciplina.MatrizDisciplinaCriacaoDTO;
 import com.controle.monitoria_api.model.dto.response.MatrizDisciplinaResponseDTO;
 import com.controle.monitoria_api.service.MatrizDisciplinaService;
 import jakarta.validation.Valid;

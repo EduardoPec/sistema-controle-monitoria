@@ -1,7 +1,7 @@
 package com.controle.monitoria_api.controller;
 
-import com.controle.monitoria_api.model.dto.request.AlunoAtualizacaoDTO;
-import com.controle.monitoria_api.model.dto.request.AlunoCriacaoDTO;
+import com.controle.monitoria_api.model.dto.request.aluno.AlunoAtualizacaoDTO;
+import com.controle.monitoria_api.model.dto.request.aluno.AlunoCriacaoDTO;
 import com.controle.monitoria_api.model.dto.response.AlunoResponseDTO;
 import com.controle.monitoria_api.service.AlunoService;
 import jakarta.validation.Valid;
@@ -37,45 +37,33 @@ public class AlunoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<AlunoResponseDTO>> listarTodos(
-            @PageableDefault(size = 10, sort = {"nomeCompleto"}, direction = Sort.Direction.ASC) Pageable paginacao) {
-        return ResponseEntity.ok(service.listarTodos(paginacao));
+    public ResponseEntity<Page<AlunoResponseDTO>> listarTodos(@PageableDefault(size = 10, sort = {"nomeCompleto"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+        var page = service.listarTodos(paginacao);
+        return ResponseEntity.ok(page);
     }
 
     @GetMapping("/ativos")
-    public ResponseEntity<Page<AlunoResponseDTO>> listarAtivos(
-            @PageableDefault(size = 10, sort = {"nomeCompleto"}, direction = Sort.Direction.ASC) Pageable paginacao) {
-        return ResponseEntity.ok(service.listarAtivos(paginacao));
+    public ResponseEntity<Page<AlunoResponseDTO>> listarAtivos(@PageableDefault(size = 10, sort = {"nomeCompleto"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+        var page = service.listarAtivos(paginacao);
+        return ResponseEntity.ok(page);
     }
 
     @GetMapping("/inativos")
-    public ResponseEntity<Page<AlunoResponseDTO>> listarInativos(
-            @PageableDefault(size = 10, sort = {"nomeCompleto"}, direction = Sort.Direction.ASC) Pageable paginacao) {
-        return ResponseEntity.ok(service.listarInativos(paginacao));
-    }
-
-    @GetMapping("/professor/{professorId}")
-    public ResponseEntity<Page<AlunoResponseDTO>> listarPorProfessor(
-            @PathVariable Long professorId,
-            @PageableDefault(size = 10, sort = {"nomeCompleto"}, direction = Sort.Direction.ASC) Pageable paginacao) {
-        return ResponseEntity.ok(service.listarPorProfessor(professorId, paginacao));
-    }
-
-    @GetMapping("/disciplina/{disciplinaId}")
-    public ResponseEntity<Page<AlunoResponseDTO>> listarPorDisciplina(
-            @PathVariable Long disciplinaId,
-            @PageableDefault(size = 10, sort = {"nomeCompleto"}, direction = Sort.Direction.ASC) Pageable paginacao) {
-        return ResponseEntity.ok(service.listarPorDisciplina(disciplinaId, paginacao));
+    public ResponseEntity<Page<AlunoResponseDTO>> listarInativos(@PageableDefault(size = 10, sort = {"nomeCompleto"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+        var page = service.listarInativos(paginacao);
+        return ResponseEntity.ok(page);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<AlunoResponseDTO> listarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(service.listarPorId(id));
+        var aluno = service.listarPorId(id);
+        return ResponseEntity.ok(aluno);
     }
 
     @PutMapping
     public ResponseEntity<AlunoResponseDTO> atualizar(@Valid @RequestBody AlunoAtualizacaoDTO dto) {
-        return ResponseEntity.ok(service.atualizar(dto));
+        var aluno = service.atualizar(dto);
+        return ResponseEntity.ok(aluno);
     }
 
     @PatchMapping("/{id}/inativar")

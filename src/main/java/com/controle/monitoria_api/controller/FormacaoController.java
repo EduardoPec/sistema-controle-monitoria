@@ -1,7 +1,7 @@
 package com.controle.monitoria_api.controller;
 
-import com.controle.monitoria_api.model.dto.request.FormacaoAtualizacaoDTO;
-import com.controle.monitoria_api.model.dto.request.FormacaoCriacaoDTO;
+import com.controle.monitoria_api.model.dto.request.formacao.FormacaoAtualizacaoDTO;
+import com.controle.monitoria_api.model.dto.request.formacao.FormacaoCriacaoDTO;
 import com.controle.monitoria_api.model.dto.response.FormacaoResponseDTO;
 import com.controle.monitoria_api.service.FormacaoService;
 import jakarta.validation.Valid;
@@ -37,26 +37,27 @@ public class FormacaoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<FormacaoResponseDTO>> listarTodos(
-            @PageableDefault(size = 10, sort = {"titulacao"}, direction = Sort.Direction.ASC) Pageable paginacao) {
-        return ResponseEntity.ok(service.listarTodos(paginacao));
+    public ResponseEntity<Page<FormacaoResponseDTO>> listarTodos(@PageableDefault(size = 10, sort = {"titulacao"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+        var page = service.listarTodos(paginacao);
+        return ResponseEntity.ok(page);
     }
 
     @GetMapping("/professor/{professorId}")
-    public ResponseEntity<Page<FormacaoResponseDTO>> listarPorProfessor(
-            @PathVariable Long professorId,
-            @PageableDefault(size = 10, sort = {"titulacao"}, direction = Sort.Direction.ASC) Pageable paginacao) {
-        return ResponseEntity.ok(service.listarPorProfessor(professorId, paginacao));
+    public ResponseEntity<Page<FormacaoResponseDTO>> listarPorProfessor(@PathVariable Long professorId, @PageableDefault(size = 10, sort = {"titulacao"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+        var page = service.listarPorProfessor(professorId, paginacao);
+        return ResponseEntity.ok(page);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<FormacaoResponseDTO> listarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(service.listarPorId(id));
+        var formacao = service.listarPorId(id);
+        return ResponseEntity.ok(formacao);
     }
 
     @PutMapping
     public ResponseEntity<FormacaoResponseDTO> atualizar(@Valid @RequestBody FormacaoAtualizacaoDTO dto) {
-        return ResponseEntity.ok(service.atualizar(dto));
+        var formacao = service.atualizar(dto);
+        return ResponseEntity.ok(formacao);
     }
 
     @DeleteMapping("/{id}")

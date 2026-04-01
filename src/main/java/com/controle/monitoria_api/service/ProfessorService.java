@@ -2,11 +2,9 @@ package com.controle.monitoria_api.service;
 
 import com.controle.monitoria_api.exceptions.ValidacaoException;
 import com.controle.monitoria_api.model.Escola;
-import com.controle.monitoria_api.model.IES;
 import com.controle.monitoria_api.model.Professor;
-import com.controle.monitoria_api.model.dto.request.EscolaAtualizacaoDTO;
-import com.controle.monitoria_api.model.dto.request.ProfessorAtualizacaoDTO;
-import com.controle.monitoria_api.model.dto.request.ProfessorCriacaoDTO;
+import com.controle.monitoria_api.model.dto.request.professor.ProfessorAtualizacaoDTO;
+import com.controle.monitoria_api.model.dto.request.professor.ProfessorCriacaoDTO;
 import com.controle.monitoria_api.model.dto.response.ProfessorResponseDTO;
 import com.controle.monitoria_api.repository.EscolaRepository;
 import com.controle.monitoria_api.repository.ProfessorRepository;

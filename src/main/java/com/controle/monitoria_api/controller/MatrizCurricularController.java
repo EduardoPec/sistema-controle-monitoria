@@ -1,7 +1,7 @@
 package com.controle.monitoria_api.controller;
 
-import com.controle.monitoria_api.model.dto.request.MatrizCurricularAtualizacaoDTO;
-import com.controle.monitoria_api.model.dto.request.MatrizCurricularCriacaoDTO;
+import com.controle.monitoria_api.model.dto.request.matrizCurricular.MatrizCurricularAtualizacaoDTO;
+import com.controle.monitoria_api.model.dto.request.matrizCurricular.MatrizCurricularCriacaoDTO;
 import com.controle.monitoria_api.model.dto.response.MatrizCurricularResponseDTO;
 import com.controle.monitoria_api.service.MatrizCurricularService;
 import jakarta.validation.Valid;

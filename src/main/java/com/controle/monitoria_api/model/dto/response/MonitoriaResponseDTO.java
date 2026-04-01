@@ -7,26 +7,30 @@ import java.time.LocalDateTime;
 
 public record MonitoriaResponseDTO(
         Long id,
-        Long alunoId,
-        String alunoNome,
-        String alunoMatricula,
-        Long disciplinaId,
-        String disciplinaSigla,
-        String disciplinaDescricao,
-        Long professorId,
-        String professorNome,
+        AlunoResponseDTO aluno,
+        DisciplinaResponseDTO disciplina,
+        ProfessorResponseDTO professor,
         String semestre,
         String tipoMonitoria,
         String local,
         LocalDate dataInicio,
         LocalDate dataFim,
-        Integer numeroAlunosAtendidos,
-        String ocorrencias,
-        String parecerFinal,
-        String status,
-        LocalDateTime dataCadastro
-) {
+        LocalDateTime dataCadastro,
+        String status) {
+
     public MonitoriaResponseDTO(Monitoria monitoria) {
-        this(monitoria.getId(), monitoria.getAluno().getId(), monitoria.getAluno().getNomeCompleto(), monitoria.getAluno().getMatricula(), monitoria.getDisciplina().getId(), monitoria.getDisciplina().getSigla(), monitoria.getDisciplina().getDescricao(), monitoria.getProfessor().getId(), monitoria.getProfessor().getNomeCompleto(), monitoria.getSemestre(), monitoria.getTipoMonitoria(), monitoria.getLocal(), monitoria.getDataInicio(), monitoria.getDataFim(), monitoria.getNumeroAlunosAtendidos(), monitoria.getOcorrencias(), monitoria.getParecerFinal(), monitoria.getStatus(), monitoria.getDataCadastro());
+        this(
+                monitoria.getId(),
+                new AlunoResponseDTO(monitoria.getAluno()),
+                new DisciplinaResponseDTO(monitoria.getDisciplina()),
+                        new ProfessorResponseDTO(monitoria.getProfessor()),
+                                monitoria.getSemestre(),
+                                monitoria.getTipoMonitoria(),
+                                monitoria.getLocal(),
+                                monitoria.getDataInicio(),
+                                monitoria.getDataFim(),
+                                monitoria.getDataCadastro(),
+                                monitoria.getStatus()
+        );
     }
 }

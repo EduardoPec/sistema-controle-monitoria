@@ -4,8 +4,8 @@ import com.controle.monitoria_api.exceptions.ValidacaoException;
 import com.controle.monitoria_api.model.Curso;
 import com.controle.monitoria_api.model.MatrizCurricular;
 
-import com.controle.monitoria_api.model.dto.request.MatrizCurricularCriacaoDTO;
-import com.controle.monitoria_api.model.dto.request.MatrizCurricularAtualizacaoDTO;
+import com.controle.monitoria_api.model.dto.request.matrizCurricular.MatrizCurricularCriacaoDTO;
+import com.controle.monitoria_api.model.dto.request.matrizCurricular.MatrizCurricularAtualizacaoDTO;
 import com.controle.monitoria_api.model.dto.response.MatrizCurricularResponseDTO;
 import com.controle.monitoria_api.repository.CursoRepository;
 import com.controle.monitoria_api.repository.MatrizCurricularRepository;

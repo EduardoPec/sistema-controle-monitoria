@@ -1,4 +1,4 @@
-package com.controle.monitoria_api.model.dto.request;
+package com.controle.monitoria_api.model.dto.request.escola;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
