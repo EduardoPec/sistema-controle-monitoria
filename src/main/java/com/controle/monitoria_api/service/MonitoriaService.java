@@ -5,9 +5,8 @@ import com.controle.monitoria_api.model.Aluno;
 import com.controle.monitoria_api.model.Disciplina;
 import com.controle.monitoria_api.model.Monitoria;
 import com.controle.monitoria_api.model.Professor;
-import com.controle.monitoria_api.model.dto.request.MonitoriaAtualizacaoDTO;
-import com.controle.monitoria_api.model.dto.request.MonitoriaCriacaoDTO;
-import com.controle.monitoria_api.model.dto.request.MonitoriaFinalizacaoDTO;
+import com.controle.monitoria_api.model.dto.request.monitoria.MonitoriaAtualizacaoDTO;
+import com.controle.monitoria_api.model.dto.request.monitoria.MonitoriaCriacaoDTO;
 import com.controle.monitoria_api.model.dto.response.MonitoriaResponseDTO;
 import com.controle.monitoria_api.repository.AlunoRepository;
 import com.controle.monitoria_api.repository.DisciplinaRepository;
@@ -33,38 +32,23 @@ public class MonitoriaService {
         var aluno = alunoRepository.findById(dto.alunoId())
                 .orElseThrow(() -> new ValidacaoException("Aluno não encontrado!"));
 
-        var disciplina = disciplinaRepository.findById(dto.disciplinaId())
+        Disciplina disciplina = disciplinaRepository.findById(dto.disciplinaId())
                 .orElseThrow(() -> new ValidacaoException("Disciplina não encontrada!"));
 
-        var professor = professorRepository.findById(dto.professorId())
+        Professor professor = professorRepository.findById(dto.professorId())
                 .orElseThrow(() -> new ValidacaoException("Professor não encontrado!"));
 
-        if (monitoriaRepository.existsByAlunoIdAndDisciplinaIdAndSemestre(
-                dto.alunoId(), dto.disciplinaId(), dto.semestre())) {
-            throw new ValidacaoException("Este aluno já possui uma monitoria nesta disciplina neste semestre!");
-        }
-
-        if (!dto.dataFim().isAfter(dto.dataInicio())) {
-            throw new ValidacaoException("A data de fim deve ser posterior à data de início!");
+        if (monitoriaRepository.existsByAlunoIdAndDisciplinaIdAndSemestreAndStatusNot(dto.alunoId(), dto.disciplinaId(), dto.semestre(), "FINALIZADA")) {
+            throw new ValidacaoException("Aluno já é monitor nesta disciplina neste semestre!");
         }
 
         var monitoria = new Monitoria(dto, aluno, disciplina, professor);
-        var salvo = monitoriaRepository.save(monitoria);
-        return new MonitoriaResponseDTO(salvo);
+        var salvar = monitoriaRepository.save(monitoria);
+        return new MonitoriaResponseDTO(salvar);
     }
 
     public Page<MonitoriaResponseDTO> listarTodos(Pageable paginacao) {
         return monitoriaRepository.findAll(paginacao)
-                .map(MonitoriaResponseDTO::new);
-    }
-
-    public Page<MonitoriaResponseDTO> listarEmAndamento(Pageable paginacao) {
-        return monitoriaRepository.findByStatus("EM_ANDAMENTO", paginacao)
-                .map(MonitoriaResponseDTO::new);
-    }
-
-    public Page<MonitoriaResponseDTO> listarFinalizadas(Pageable paginacao) {
-        return monitoriaRepository.findByStatus("FINALIZADA", paginacao)
                 .map(MonitoriaResponseDTO::new);
     }
 
@@ -76,35 +60,16 @@ public class MonitoriaService {
                 .map(MonitoriaResponseDTO::new);
     }
 
-    public Page<MonitoriaResponseDTO> listarPorProfessorEmAndamento(Long professorId, Pageable paginacao) {
-        if (!professorRepository.existsById(professorId)) {
-            throw new ValidacaoException("Professor não encontrado!");
-        }
-        return monitoriaRepository.findByProfessorIdAndStatus(professorId, "EM_ANDAMENTO", paginacao)
-                .map(MonitoriaResponseDTO::new);
-    }
-
-    public Page<MonitoriaResponseDTO> listarPorProfessorFinalizadas(Long professorId, Pageable paginacao) {
-        if (!professorRepository.existsById(professorId)) {
-            throw new ValidacaoException("Professor não encontrado!");
-        }
-        return monitoriaRepository.findByProfessorIdAndStatus(professorId, "FINALIZADA", paginacao)
-                .map(MonitoriaResponseDTO::new);
-    }
-
-    public Page<MonitoriaResponseDTO> listarPorDisciplina(Long disciplinaId, Pageable paginacao) {
-        if (!disciplinaRepository.existsById(disciplinaId)) {
-            throw new ValidacaoException("Disciplina não encontrada!");
-        }
-        return monitoriaRepository.findByDisciplinaId(disciplinaId, paginacao)
-                .map(MonitoriaResponseDTO::new);
-    }
-
     public Page<MonitoriaResponseDTO> listarPorAluno(Long alunoId, Pageable paginacao) {
         if (!alunoRepository.existsById(alunoId)) {
             throw new ValidacaoException("Aluno não encontrado!");
         }
         return monitoriaRepository.findByAlunoId(alunoId, paginacao)
+                .map(MonitoriaResponseDTO::new);
+    }
+
+    public Page<MonitoriaResponseDTO> listarPorStatus(String status, Pageable paginacao) {
+        return monitoriaRepository.findByStatus(status, paginacao)
                 .map(MonitoriaResponseDTO::new);
     }
 
@@ -118,10 +83,6 @@ public class MonitoriaService {
     public MonitoriaResponseDTO atualizar(MonitoriaAtualizacaoDTO dto) {
         var monitoria = monitoriaRepository.findById(dto.id())
                 .orElseThrow(() -> new ValidacaoException("Monitoria não encontrada!"));
-
-        if (monitoria.getStatus().equals("FINALIZADA")) {
-            throw new ValidacaoException("Não é possível alterar uma monitoria já finalizada!");
-        }
 
         Aluno novoAluno = null;
         if (dto.alunoId() != null) {
@@ -141,51 +102,15 @@ public class MonitoriaService {
                     .orElseThrow(() -> new ValidacaoException("Professor não encontrado!"));
         }
 
-        validarDuplicidadeNaAtualizacao(dto, monitoria);
-        validarDatasNaAtualizacao(dto, monitoria);
-
         monitoria.atualizarInformacoes(dto, novoAluno, novaDisciplina, novoProfessor);
         return new MonitoriaResponseDTO(monitoria);
     }
 
     @Transactional
-    public MonitoriaResponseDTO finalizar(MonitoriaFinalizacaoDTO dto) {
-        var monitoria = monitoriaRepository.findById(dto.id())
+    public void finalizar(Long id) {
+        var monitoria = monitoriaRepository.findById(id)
                 .orElseThrow(() -> new ValidacaoException("Monitoria não encontrada!"));
-
-        if (monitoria.getStatus().equals("FINALIZADA")) {
-            throw new ValidacaoException("Esta monitoria já foi finalizada!");
-        }
-
-        monitoria.finalizarMonitoria(dto.numeroAlunosAtendidos(), dto.ocorrencias(), dto.parecerFinal());
+        monitoria.finalizar();
         monitoriaRepository.save(monitoria);
-        return new MonitoriaResponseDTO(monitoria);
-    }
-
-    public long contarPorDisciplinaESemestre(Long disciplinaId, String semestre) {
-        if (!disciplinaRepository.existsById(disciplinaId)) {
-            throw new ValidacaoException("Disciplina não encontrada!");
-        }
-        return monitoriaRepository.countByDisciplinaIdAndSemestre(disciplinaId, semestre);
-    }
-
-    private void validarDuplicidadeNaAtualizacao(MonitoriaAtualizacaoDTO dto, Monitoria monitoria) {
-        Long alunoIdFinal = dto.alunoId() != null ? dto.alunoId() : monitoria.getAluno().getId();
-        Long disciplinaIdFinal = dto.disciplinaId() != null ? dto.disciplinaId() : monitoria.getDisciplina().getId();
-        String semestreFinal = dto.semestre() != null ? dto.semestre() : monitoria.getSemestre();
-
-        if (monitoriaRepository.existsByAlunoIdAndDisciplinaIdAndSemestreAndIdNot(
-                alunoIdFinal, disciplinaIdFinal, semestreFinal, monitoria.getId())) {
-            throw new ValidacaoException("Este aluno já possui uma monitoria nesta disciplina neste semestre!");
-        }
-    }
-
-    private void validarDatasNaAtualizacao(MonitoriaAtualizacaoDTO dto, Monitoria monitoria) {
-        var dataInicio = dto.dataInicio() != null ? dto.dataInicio() : monitoria.getDataInicio();
-        var dataFim = dto.dataFim() != null ? dto.dataFim() : monitoria.getDataFim();
-
-        if (!dataFim.isAfter(dataInicio)) {
-            throw new ValidacaoException("A data de fim deve ser posterior à data de início!");
-        }
     }
 }

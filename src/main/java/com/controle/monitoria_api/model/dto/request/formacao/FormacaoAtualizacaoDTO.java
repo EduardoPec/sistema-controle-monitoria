@@ -1,4 +1,4 @@
-package com.controle.monitoria_api.model.dto.request;
+package com.controle.monitoria_api.model.dto.request.formacao;
 
 import jakarta.validation.constraints.*;
 

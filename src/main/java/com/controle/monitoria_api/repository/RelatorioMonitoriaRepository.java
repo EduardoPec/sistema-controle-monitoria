@@ -9,9 +9,13 @@ import java.util.Optional;
 
 public interface RelatorioMonitoriaRepository extends JpaRepository<RelatorioMonitoria, Long> {
 
-    boolean existsByMonitoriaId(Long monitoriaId);
-
     Optional<RelatorioMonitoria> findByMonitoriaId(Long monitoriaId);
 
+    Page<RelatorioMonitoria> findByMonitoriaStatus(String status, Pageable paginacao);
+    Page<RelatorioMonitoria> findByMonitoriaSemestre(String semestre, Pageable paginacao);
+    Page<RelatorioMonitoria> findByMonitoriaAlunoId(Long alunoId, Pageable paginacao);
+    Page<RelatorioMonitoria> findByMonitoriaDisciplinaId(Long disciplinaId, Pageable paginacao);
     Page<RelatorioMonitoria> findByMonitoriaProfessorId(Long professorId, Pageable paginacao);
+
+    boolean existsByMonitoriaId(Long monitoriaId);
 }

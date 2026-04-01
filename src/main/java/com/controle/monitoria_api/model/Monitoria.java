@@ -1,7 +1,7 @@
 package com.controle.monitoria_api.model;
 
-import com.controle.monitoria_api.model.dto.request.MonitoriaCriacaoDTO;
-import com.controle.monitoria_api.model.dto.request.MonitoriaAtualizacaoDTO;
+import com.controle.monitoria_api.model.dto.request.monitoria.MonitoriaCriacaoDTO;
+import com.controle.monitoria_api.model.dto.request.monitoria.MonitoriaAtualizacaoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -50,20 +50,14 @@ public class Monitoria {
     @Column(name = "data_fim", nullable = false)
     private LocalDate dataFim;
 
-    @Column(name = "numero_alunos_atendidos")
-    private Integer numeroAlunosAtendidos;
-
-    @Column(length = 500)
-    private String ocorrencias;
-
-    @Column(name = "parecer_final", length = 500)
-    private String parecerFinal;
+    @Column(name = "data_cadastro")
+    private LocalDateTime dataCadastro;
 
     @Column(nullable = false, length = 20)
     private String status;
 
-    @Column(name = "data_cadastro")
-    private LocalDateTime dataCadastro;
+    @OneToOne(mappedBy = "monitoria", cascade = CascadeType.ALL)
+    private RelatorioMonitoria relatorio;
 
     public Monitoria(MonitoriaCriacaoDTO dto, Aluno aluno, Disciplina disciplina, Professor professor) {
         this.aluno = aluno;
@@ -109,10 +103,15 @@ public class Monitoria {
         }
     }
 
-    public void finalizarMonitoria(Integer numeroAlunosAtendidos, String ocorrencias, String parecerFinal) {
-        this.numeroAlunosAtendidos = numeroAlunosAtendidos;
-        this.ocorrencias = ocorrencias;
-        this.parecerFinal = parecerFinal;
+    public void finalizar() {
         this.status = "FINALIZADA";
+    }
+
+    public boolean isEmAndamento() {
+        return "EM_ANDAMENTO".equals(this.status);
+    }
+
+    public boolean isFinalizada() {
+        return "FINALIZADA".equals(this.status);
     }
 }

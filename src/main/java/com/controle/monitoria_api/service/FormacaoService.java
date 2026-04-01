@@ -2,8 +2,8 @@ package com.controle.monitoria_api.service;
 
 import com.controle.monitoria_api.exceptions.ValidacaoException;
 import com.controle.monitoria_api.model.Formacao;
-import com.controle.monitoria_api.model.dto.request.FormacaoAtualizacaoDTO;
-import com.controle.monitoria_api.model.dto.request.FormacaoCriacaoDTO;
+import com.controle.monitoria_api.model.dto.request.formacao.FormacaoAtualizacaoDTO;
+import com.controle.monitoria_api.model.dto.request.formacao.FormacaoCriacaoDTO;
 import com.controle.monitoria_api.model.dto.response.FormacaoResponseDTO;
 import com.controle.monitoria_api.repository.FormacaoRepository;
 import com.controle.monitoria_api.repository.ProfessorRepository;
@@ -44,6 +44,7 @@ public class FormacaoService {
         if (!professorRepository.existsById(professorId)) {
             throw new ValidacaoException("Professor não encontrado!");
         }
+
         return formacaoRepository.findByProfessorId(professorId, paginacao)
                 .map(FormacaoResponseDTO::new);
     }

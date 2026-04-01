@@ -1,7 +1,7 @@
 package com.controle.monitoria_api.controller;
 
-import com.controle.monitoria_api.model.dto.request.CursoAtualizacaoDTO;
-import com.controle.monitoria_api.model.dto.request.CursoCriacaoDTO;
+import com.controle.monitoria_api.model.dto.request.curso.CursoAtualizacaoDTO;
+import com.controle.monitoria_api.model.dto.request.curso.CursoCriacaoDTO;
 import com.controle.monitoria_api.model.dto.response.CursoResponseDTO;
 import com.controle.monitoria_api.service.CursoService;
 import jakarta.validation.Valid;

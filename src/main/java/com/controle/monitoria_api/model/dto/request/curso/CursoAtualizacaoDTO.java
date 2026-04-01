@@ -1,4 +1,4 @@
-package com.controle.monitoria_api.model.dto.request;
+package com.controle.monitoria_api.model.dto.request.curso;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
