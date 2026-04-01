@@ -1,6 +1,7 @@
 package com.controle.monitoria_api.service;
 
-import com.controle.monitoria_api.exceptions.ValidacaoException;
+import com.controle.monitoria_api.service.exceptions.RecursoNaoEncontradoException;
+import com.controle.monitoria_api.service.exceptions.ValidacaoException;
 import com.controle.monitoria_api.model.Formacao;
 import com.controle.monitoria_api.model.dto.request.formacao.FormacaoAtualizacaoDTO;
 import com.controle.monitoria_api.model.dto.request.formacao.FormacaoCriacaoDTO;
@@ -23,7 +24,7 @@ public class FormacaoService {
     @Transactional
     public FormacaoResponseDTO criar(FormacaoCriacaoDTO dto) {
         var professor = professorRepository.findById(dto.professorId())
-                .orElseThrow(() -> new ValidacaoException("Professor não encontrado!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Professor não encontrado!"));
 
         if (formacaoRepository.existsByProfessorIdAndTitulacaoAndNomeCursoAndInstituicao(
                 dto.professorId(), dto.titulacao(), dto.nomeCurso(), dto.instituicao())) {
@@ -42,7 +43,7 @@ public class FormacaoService {
 
     public Page<FormacaoResponseDTO> listarPorProfessor(Long professorId, Pageable paginacao) {
         if (!professorRepository.existsById(professorId)) {
-            throw new ValidacaoException("Professor não encontrado!");
+            throw new RecursoNaoEncontradoException("Professor não encontrado!");
         }
 
         return formacaoRepository.findByProfessorId(professorId, paginacao)
@@ -51,14 +52,14 @@ public class FormacaoService {
 
     public FormacaoResponseDTO listarPorId(Long id) {
         var formacao = formacaoRepository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Formação não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Formação não encontrada!"));
         return new FormacaoResponseDTO(formacao);
     }
 
     @Transactional
     public FormacaoResponseDTO atualizar(FormacaoAtualizacaoDTO dto) {
         var formacao = formacaoRepository.findById(dto.id())
-                .orElseThrow(() -> new ValidacaoException("Formação não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Formação não encontrada!"));
 
         validarDuplicidadeNaAtualizacao(dto, formacao);
 
@@ -69,7 +70,7 @@ public class FormacaoService {
     @Transactional
     public void excluir(Long id) {
         if (!formacaoRepository.existsById(id)) {
-            throw new ValidacaoException("Formação não encontrada!");
+            throw new RecursoNaoEncontradoException("Formação não encontrada!");
         }
         formacaoRepository.deleteById(id);
     }

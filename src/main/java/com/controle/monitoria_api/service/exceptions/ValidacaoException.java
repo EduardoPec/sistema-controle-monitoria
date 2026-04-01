@@ -1,4 +1,4 @@
-package com.controle.monitoria_api.exceptions;
+package com.controle.monitoria_api.service.exceptions;
 
 public class ValidacaoException extends RuntimeException {
 

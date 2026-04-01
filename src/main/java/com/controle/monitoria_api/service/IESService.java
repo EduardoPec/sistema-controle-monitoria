@@ -1,6 +1,7 @@
 package com.controle.monitoria_api.service;
 
-import com.controle.monitoria_api.exceptions.ValidacaoException;
+import com.controle.monitoria_api.service.exceptions.RecursoNaoEncontradoException;
+import com.controle.monitoria_api.service.exceptions.ValidacaoException;
 import com.controle.monitoria_api.model.IES;
 import com.controle.monitoria_api.model.dto.request.ies.IESAtualizacaoDTO;
 import com.controle.monitoria_api.model.dto.request.ies.IESCriacaoDTO;
@@ -36,14 +37,14 @@ public class IESService {
 
     public IESResponseDTO listarPorId(Long id) {
         var ies = repository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("IES não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("IES não encontrada!"));
         return new IESResponseDTO(ies);
     }
 
     @Transactional
     public IESResponseDTO atualizar(IESAtualizacaoDTO dto) {
         var ies = repository.findById(dto.id())
-                .orElseThrow(() -> new ValidacaoException("IES não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("IES não encontrada!"));
 
         ies.atualizarInformacoes(dto);
         return new IESResponseDTO(ies);
@@ -52,7 +53,7 @@ public class IESService {
     @Transactional
     public void excluir(Long id) {
         var ies = repository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("IES não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("IES não encontrada!"));
 
         if (!ies.getEscolas().isEmpty()) {
             throw new ValidacaoException("Não é possível excluir IES que possui escolas vinculadas!");

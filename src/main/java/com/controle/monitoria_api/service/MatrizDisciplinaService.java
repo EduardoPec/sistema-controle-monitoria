@@ -1,6 +1,7 @@
 package com.controle.monitoria_api.service;
 
-import com.controle.monitoria_api.exceptions.ValidacaoException;
+import com.controle.monitoria_api.service.exceptions.RecursoNaoEncontradoException;
+import com.controle.monitoria_api.service.exceptions.ValidacaoException;
 import com.controle.monitoria_api.model.Disciplina;
 import com.controle.monitoria_api.model.MatrizCurricular;
 import com.controle.monitoria_api.model.MatrizDisciplina;
@@ -32,10 +33,10 @@ public class MatrizDisciplinaService {
     @Transactional
     public MatrizDisciplinaResponseDTO criar(MatrizDisciplinaCriacaoDTO dto) {
         var matrizCurricular = matrizCurricularRepository.findById(dto.matrizId())
-                .orElseThrow(() -> new ValidacaoException("Matriz não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Matriz não encontrada!"));
 
         var disciplina = disciplinaRepository.findById(dto.disciplinaId())
-                .orElseThrow(() -> new ValidacaoException("Disciplina não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Disciplina não encontrada!"));
 
         if (matrizDisciplinaRepository.existsByMatrizCurricularIdAndDisciplinaId(dto.matrizId(), dto.disciplinaId())) {
             throw new ValidacaoException("Esta disciplina já está associada a esta matriz!");
@@ -57,7 +58,7 @@ public class MatrizDisciplinaService {
 
     public Page<MatrizDisciplinaResponseDTO> listarPorMatriz(Long matrizId, Pageable paginacao) {
         if (!matrizCurricularRepository.existsById(matrizId)) {
-            throw new ValidacaoException("Matriz não encontrada!");
+            throw new RecursoNaoEncontradoException("Matriz não encontrada!");
         }
         return matrizDisciplinaRepository.findByMatrizCurricularId(matrizId, paginacao)
                 .map(MatrizDisciplinaResponseDTO::new);
@@ -65,7 +66,7 @@ public class MatrizDisciplinaService {
 
     public Page<MatrizDisciplinaResponseDTO> listarPorDisciplina(Long disciplinaId, Pageable paginacao) {
         if (!disciplinaRepository.existsById(disciplinaId)) {
-            throw new ValidacaoException("Disciplina não encontrada!");
+            throw new RecursoNaoEncontradoException("Disciplina não encontrada!");
         }
         return matrizDisciplinaRepository.findByDisciplinaId(disciplinaId, paginacao)
                 .map(MatrizDisciplinaResponseDTO::new);
@@ -73,25 +74,25 @@ public class MatrizDisciplinaService {
 
     public MatrizDisciplinaResponseDTO listarPorId(Long id) {
         var matrizDisciplina = matrizDisciplinaRepository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Associação não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Associação não encontrada!"));
         return new MatrizDisciplinaResponseDTO(matrizDisciplina);
     }
 
     @Transactional
     public MatrizDisciplinaResponseDTO atualizar(MatrizDisciplinaAtualizacaoDTO dto) {
         MatrizDisciplina matrizDisciplina = matrizDisciplinaRepository.findById(dto.id())
-                .orElseThrow(() -> new ValidacaoException("Associação não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Associação não encontrada!"));
 
         MatrizCurricular novaMatriz = null;
         if (dto.matrizId() != null) {
             novaMatriz = matrizCurricularRepository.findById(dto.matrizId())
-                    .orElseThrow(() -> new ValidacaoException("Matriz não encontrada!"));
+                    .orElseThrow(() -> new RecursoNaoEncontradoException("Matriz não encontrada!"));
         }
 
         Disciplina novaDisciplina = null;
         if (dto.disciplinaId() != null) {
             novaDisciplina = disciplinaRepository.findById(dto.disciplinaId())
-                    .orElseThrow(() -> new ValidacaoException("Disciplina não encontrada!"));
+                    .orElseThrow(() -> new RecursoNaoEncontradoException("Disciplina não encontrada!"));
         }
 
         validarDuplicidadeNaAtualizacao(dto, matrizDisciplina);
@@ -105,7 +106,7 @@ public class MatrizDisciplinaService {
     @Transactional
     public void excluir(Long id) {
         if (!matrizDisciplinaRepository.existsById(id)) {
-            throw new ValidacaoException("Associação não encontrada!");
+            throw new RecursoNaoEncontradoException("Associação não encontrada!");
         }
         matrizDisciplinaRepository.deleteById(id);
     }
@@ -116,7 +117,7 @@ public class MatrizDisciplinaService {
                     .existsByMatrizCurricularIdAndDisciplinaId(matrizCurricular.getId(), preRequisito.getId());
 
             if (!existeNaMatriz) {
-                throw new ValidacaoException("O pré-requisito " + preRequisito.getSigla() + " não está presente nesta matriz!");
+                throw new RecursoNaoEncontradoException("O pré-requisito " + preRequisito.getSigla() + " não está presente nesta matriz!");
             }
         }
     }
@@ -129,7 +130,7 @@ public class MatrizDisciplinaService {
         List<Disciplina> preRequisitos = disciplinaRepository.findAllById(preRequisitosIds);
 
         if (preRequisitos.size() != preRequisitosIds.size()) {
-            throw new ValidacaoException("Algum pré-requisito não foi encontrado!");
+            throw new RecursoNaoEncontradoException("Algum pré-requisito não foi encontrado!");
         }
         return preRequisitos;
     }
