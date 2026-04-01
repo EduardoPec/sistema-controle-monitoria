@@ -1,7 +1,7 @@
 package com.controle.monitoria_api.model;
 
-import com.controle.monitoria_api.model.dto.request.CursoAtualizacaoDTO;
-import com.controle.monitoria_api.model.dto.request.CursoCriacaoDTO;
+import com.controle.monitoria_api.model.dto.request.curso.CursoAtualizacaoDTO;
+import com.controle.monitoria_api.model.dto.request.curso.CursoCriacaoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

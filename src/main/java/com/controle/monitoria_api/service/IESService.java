@@ -2,8 +2,8 @@ package com.controle.monitoria_api.service;
 
 import com.controle.monitoria_api.exceptions.ValidacaoException;
 import com.controle.monitoria_api.model.IES;
-import com.controle.monitoria_api.model.dto.request.IESAtualizacaoDTO;
-import com.controle.monitoria_api.model.dto.request.IESCriacaoDTO;
+import com.controle.monitoria_api.model.dto.request.ies.IESAtualizacaoDTO;
+import com.controle.monitoria_api.model.dto.request.ies.IESCriacaoDTO;
 import com.controle.monitoria_api.model.dto.response.IESResponseDTO;
 import com.controle.monitoria_api.repository.IESRepository;
 import lombok.RequiredArgsConstructor;

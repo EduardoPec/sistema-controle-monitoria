@@ -1,7 +1,7 @@
 package com.controle.monitoria_api.controller;
 
-import com.controle.monitoria_api.model.dto.request.IESAtualizacaoDTO;
-import com.controle.monitoria_api.model.dto.request.IESCriacaoDTO;
+import com.controle.monitoria_api.model.dto.request.ies.IESAtualizacaoDTO;
+import com.controle.monitoria_api.model.dto.request.ies.IESCriacaoDTO;
 import com.controle.monitoria_api.model.dto.response.IESResponseDTO;
 import com.controle.monitoria_api.service.IESService;
 import jakarta.validation.Valid;

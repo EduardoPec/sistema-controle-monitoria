@@ -1,22 +1,25 @@
 package com.controle.monitoria_api.model;
 
-import com.controle.monitoria_api.model.dto.request.professor.ProfessorAtualizacaoDTO;
-import com.controle.monitoria_api.model.dto.request.professor.ProfessorCriacaoDTO;
+import com.controle.monitoria_api.model.dto.request.aluno.AlunoAtualizacaoDTO;
+import com.controle.monitoria_api.model.dto.request.aluno.AlunoCriacaoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "professor")
+@Table(name = "alunos")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @EqualsAndHashCode(of = "id")
-public class Professor {
+public class Aluno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,51 +31,32 @@ public class Professor {
     @Column(name = "nome_completo", nullable = false, length = 100)
     private String nomeCompleto;
 
-    @Column(nullable = false, length = 100 ,unique = true)
-    private String email;
-
-    @Column(nullable = false, length = 20)
-    private String telefone;
-
-    @ManyToOne
-    @JoinColumn(name = "escola_id", nullable = false)
-    private Escola escola;
-
     @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
 
     @Column(nullable = false)
     private Boolean ativo;
 
+    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
+    private List<Monitoria> monitorias = new ArrayList<>();
+
+    public Aluno(AlunoCriacaoDTO dto) {
+        this.matricula = dto.matricula();
+        this.nomeCompleto = dto.nomeCompleto();
+        this.ativo = true;
+    }
+
     @PrePersist
     public void onCreate() {
         this.dataCadastro = LocalDateTime.now();
     }
 
-    public Professor(ProfessorCriacaoDTO dto, Escola escola) {
-        this.matricula = dto.matricula();
-        this.nomeCompleto = dto.nomeCompleto();
-        this.email = dto.email();
-        this.telefone = dto.telefone();
-        this.escola = escola;
-        this.ativo = true;
-    }
-
-    public void atualizarInformacoes(ProfessorAtualizacaoDTO dto, Escola escola) {
+    public void atualizarInformacoes(AlunoAtualizacaoDTO dto) {
         if (dto.matricula() != null) {
             this.matricula = dto.matricula();
         }
         if (dto.nomeCompleto() != null) {
             this.nomeCompleto = dto.nomeCompleto();
-        }
-        if (dto.email() != null) {
-            this.email = dto.email();
-        }
-        if (dto.telefone() != null) {
-            this.telefone = dto.telefone();
-        }
-        if (dto.escolaId() != null && escola != null) {
-            this.escola = escola;
         }
     }
 
@@ -83,5 +67,4 @@ public class Professor {
     public void ativar() {
         this.ativo = true;
     }
-
 }
