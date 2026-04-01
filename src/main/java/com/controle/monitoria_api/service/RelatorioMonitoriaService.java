@@ -1,6 +1,7 @@
 package com.controle.monitoria_api.service;
 
-import com.controle.monitoria_api.exceptions.ValidacaoException;
+import com.controle.monitoria_api.service.exceptions.RecursoNaoEncontradoException;
+import com.controle.monitoria_api.service.exceptions.ValidacaoException;
 import com.controle.monitoria_api.model.RelatorioMonitoria;
 import com.controle.monitoria_api.model.dto.request.relatorioMonitoria.RelatorioMonitoriaCriacaoDTO;
 import com.controle.monitoria_api.model.dto.response.RelatorioMonitoriaResponseDTO;
@@ -22,7 +23,7 @@ public class RelatorioMonitoriaService {
     @Transactional
     public RelatorioMonitoriaResponseDTO criar(RelatorioMonitoriaCriacaoDTO dto) {
         var monitoria = monitoriaRepository.findById(dto.monitoriaId())
-                .orElseThrow(() -> new ValidacaoException("Monitoria não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Monitoria não encontrada!"));
 
         if (relatorioRepository.existsByMonitoriaId(dto.monitoriaId())) {
             throw new ValidacaoException("Já existe um relatório para esta monitoria!");
@@ -69,13 +70,13 @@ public class RelatorioMonitoriaService {
 
     public RelatorioMonitoriaResponseDTO listarPorMonitoria(Long monitoriaId) {
         RelatorioMonitoria relatorio = relatorioRepository.findByMonitoriaId(monitoriaId)
-                .orElseThrow(() -> new ValidacaoException("Relatório não encontrado para esta monitoria!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Relatório não encontrado para esta monitoria!"));
         return new RelatorioMonitoriaResponseDTO(relatorio);
     }
 
     public RelatorioMonitoriaResponseDTO listarPorId(Long id) {
         var relatorio = relatorioRepository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Relatório não encontrado!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Relatório não encontrado!"));
         return new RelatorioMonitoriaResponseDTO(relatorio);
     }
 }

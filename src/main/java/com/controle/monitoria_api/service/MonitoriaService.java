@@ -1,6 +1,7 @@
 package com.controle.monitoria_api.service;
 
-import com.controle.monitoria_api.exceptions.ValidacaoException;
+import com.controle.monitoria_api.service.exceptions.RecursoNaoEncontradoException;
+import com.controle.monitoria_api.service.exceptions.ValidacaoException;
 import com.controle.monitoria_api.model.Aluno;
 import com.controle.monitoria_api.model.Disciplina;
 import com.controle.monitoria_api.model.Monitoria;
@@ -30,13 +31,13 @@ public class MonitoriaService {
     @Transactional
     public MonitoriaResponseDTO criar(MonitoriaCriacaoDTO dto) {
         var aluno = alunoRepository.findById(dto.alunoId())
-                .orElseThrow(() -> new ValidacaoException("Aluno não encontrado!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Aluno não encontrado!"));
 
         Disciplina disciplina = disciplinaRepository.findById(dto.disciplinaId())
-                .orElseThrow(() -> new ValidacaoException("Disciplina não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Disciplina não encontrada!"));
 
         Professor professor = professorRepository.findById(dto.professorId())
-                .orElseThrow(() -> new ValidacaoException("Professor não encontrado!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Professor não encontrado!"));
 
         if (monitoriaRepository.existsByAlunoIdAndDisciplinaIdAndSemestreAndStatusNot(dto.alunoId(), dto.disciplinaId(), dto.semestre(), "FINALIZADA")) {
             throw new ValidacaoException("Aluno já é monitor nesta disciplina neste semestre!");
@@ -54,7 +55,7 @@ public class MonitoriaService {
 
     public Page<MonitoriaResponseDTO> listarPorProfessor(Long professorId, Pageable paginacao) {
         if (!professorRepository.existsById(professorId)) {
-            throw new ValidacaoException("Professor não encontrado!");
+            throw new RecursoNaoEncontradoException("Professor não encontrado!");
         }
         return monitoriaRepository.findByProfessorId(professorId, paginacao)
                 .map(MonitoriaResponseDTO::new);
@@ -62,7 +63,7 @@ public class MonitoriaService {
 
     public Page<MonitoriaResponseDTO> listarPorAluno(Long alunoId, Pageable paginacao) {
         if (!alunoRepository.existsById(alunoId)) {
-            throw new ValidacaoException("Aluno não encontrado!");
+            throw new RecursoNaoEncontradoException("Aluno não encontrado!");
         }
         return monitoriaRepository.findByAlunoId(alunoId, paginacao)
                 .map(MonitoriaResponseDTO::new);
@@ -75,31 +76,31 @@ public class MonitoriaService {
 
     public MonitoriaResponseDTO listarPorId(Long id) {
         var monitoria = monitoriaRepository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Monitoria não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Monitoria não encontrada!"));
         return new MonitoriaResponseDTO(monitoria);
     }
 
     @Transactional
     public MonitoriaResponseDTO atualizar(MonitoriaAtualizacaoDTO dto) {
         var monitoria = monitoriaRepository.findById(dto.id())
-                .orElseThrow(() -> new ValidacaoException("Monitoria não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Monitoria não encontrada!"));
 
         Aluno novoAluno = null;
         if (dto.alunoId() != null) {
             novoAluno = alunoRepository.findById(dto.alunoId())
-                    .orElseThrow(() -> new ValidacaoException("Aluno não encontrado!"));
+                    .orElseThrow(() -> new RecursoNaoEncontradoException("Aluno não encontrado!"));
         }
 
         Disciplina novaDisciplina = null;
         if (dto.disciplinaId() != null) {
             novaDisciplina = disciplinaRepository.findById(dto.disciplinaId())
-                    .orElseThrow(() -> new ValidacaoException("Disciplina não encontrada!"));
+                    .orElseThrow(() -> new RecursoNaoEncontradoException("Disciplina não encontrada!"));
         }
 
         Professor novoProfessor = null;
         if (dto.professorId() != null) {
             novoProfessor = professorRepository.findById(dto.professorId())
-                    .orElseThrow(() -> new ValidacaoException("Professor não encontrado!"));
+                    .orElseThrow(() -> new RecursoNaoEncontradoException("Professor não encontrado!"));
         }
 
         monitoria.atualizarInformacoes(dto, novoAluno, novaDisciplina, novoProfessor);
@@ -109,7 +110,7 @@ public class MonitoriaService {
     @Transactional
     public void finalizar(Long id) {
         var monitoria = monitoriaRepository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Monitoria não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Monitoria não encontrada!"));
         monitoria.finalizar();
         monitoriaRepository.save(monitoria);
     }
