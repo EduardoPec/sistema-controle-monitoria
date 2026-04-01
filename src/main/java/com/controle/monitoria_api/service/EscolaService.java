@@ -1,6 +1,7 @@
 package com.controle.monitoria_api.service;
 
-import com.controle.monitoria_api.exceptions.ValidacaoException;
+import com.controle.monitoria_api.service.exceptions.RecursoNaoEncontradoException;
+import com.controle.monitoria_api.service.exceptions.ValidacaoException;
 import com.controle.monitoria_api.model.Escola;
 import com.controle.monitoria_api.model.IES;
 import com.controle.monitoria_api.model.dto.request.escola.EscolaAtualizacaoDTO;
@@ -25,7 +26,7 @@ public class EscolaService {
     @Transactional
     public EscolaResponseDTO criar(EscolaCriacaoDTO dto) {
         var ies = iesRepository.findById(dto.iesId())
-                .orElseThrow(() -> new ValidacaoException("IES não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("IES não encontrada!"));
 
         if (escolaRepository.existsByNomeAndIesId(dto.nome(), dto.iesId())) {
             throw new ValidacaoException("Já existe uma escola com este nome nessa IES!");
@@ -53,7 +54,7 @@ public class EscolaService {
 
     public Page<EscolaResponseDTO> listarPorIES(Long iesId, Pageable paginacao) {
         if (!iesRepository.existsById(iesId)) {
-            throw new ValidacaoException("IES não encontrada!");
+            throw new RecursoNaoEncontradoException("IES não encontrada!");
         }
 
         return escolaRepository.findByIesId(iesId, paginacao)
@@ -62,19 +63,19 @@ public class EscolaService {
 
     public EscolaResponseDTO listarPorId(Long id) {
         var escola = escolaRepository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Escola não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Escola não encontrada!"));
         return new EscolaResponseDTO(escola);
     }
 
     @Transactional
     public EscolaResponseDTO atualizar(EscolaAtualizacaoDTO dto) {
         var escola = escolaRepository.findById(dto.id())
-                .orElseThrow(() -> new ValidacaoException("Escola não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Escola não encontrada!"));
 
         IES novaIes = null;
         if (dto.iesId() != null) {
             novaIes = iesRepository.findById(dto.iesId())
-                    .orElseThrow(() -> new ValidacaoException("IES não encontrada!"));
+                    .orElseThrow(() -> new RecursoNaoEncontradoException("IES não encontrada!"));
         }
 
         validarNomeUnicoNaAtualizacao(dto, escola);
@@ -86,7 +87,7 @@ public class EscolaService {
     @Transactional
     public void inativar(Long id) {
         var escola = escolaRepository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Escola não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Escola não encontrada!"));
         escola.inativar();
         escolaRepository.save(escola);
     }
@@ -94,7 +95,7 @@ public class EscolaService {
     @Transactional
     public void ativar(Long id) {
         var escola = escolaRepository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Escola não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Escola não encontrada!"));
         escola.ativar();
         escolaRepository.save(escola);
     }

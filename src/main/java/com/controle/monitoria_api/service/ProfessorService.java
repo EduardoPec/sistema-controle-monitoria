@@ -1,6 +1,7 @@
 package com.controle.monitoria_api.service;
 
-import com.controle.monitoria_api.exceptions.ValidacaoException;
+import com.controle.monitoria_api.service.exceptions.RecursoNaoEncontradoException;
+import com.controle.monitoria_api.service.exceptions.ValidacaoException;
 import com.controle.monitoria_api.model.Escola;
 import com.controle.monitoria_api.model.Professor;
 import com.controle.monitoria_api.model.dto.request.professor.ProfessorAtualizacaoDTO;
@@ -25,7 +26,7 @@ public class ProfessorService {
     @Transactional
     public ProfessorResponseDTO criar(ProfessorCriacaoDTO dto) {
         var escola = escolaRepository.findById(dto.escolaId())
-                .orElseThrow(() -> new ValidacaoException("Escola não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Escola não encontrada!"));
 
         if (professorRepository.existsByMatricula(dto.matricula())) {
             throw new ValidacaoException("Já existe um professor com esta matrícula!");
@@ -56,7 +57,7 @@ public class ProfessorService {
 
     public Page<ProfessorResponseDTO> listarPorEscola(Long escolaId, Pageable paginacao) {
         if (!escolaRepository.existsById(escolaId)) {
-            throw new ValidacaoException("Escola não encontrada!");
+            throw new RecursoNaoEncontradoException("Escola não encontrada!");
         }
 
         return professorRepository.findByEscolaId(escolaId, paginacao)
@@ -65,19 +66,19 @@ public class ProfessorService {
 
     public ProfessorResponseDTO listarPorId(Long id) {
         var professor = professorRepository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Professor não encontrado(a)!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Professor não encontrado(a)!"));
         return new ProfessorResponseDTO(professor);
     }
 
     @Transactional
     public ProfessorResponseDTO atualizar(ProfessorAtualizacaoDTO dto) {
         var professor = professorRepository.findById(dto.id())
-                .orElseThrow(() -> new ValidacaoException("Professor não encontrado(a)!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Professor não encontrado(a)!"));
 
         Escola novaEscola = null;
         if (dto.escolaId() != null) {
             novaEscola = escolaRepository.findById(dto.escolaId())
-                    .orElseThrow(() -> new ValidacaoException("Escola não encontrada!"));
+                    .orElseThrow(() -> new RecursoNaoEncontradoException("Escola não encontrada!"));
         }
 
         validarMatriculaUnicaNaAtualizacao(dto, professor);
@@ -90,7 +91,7 @@ public class ProfessorService {
     @Transactional
     public void inativar(Long id) {
         var professor = professorRepository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Professor não encontrado(a)!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Professor não encontrado(a)!"));
         professor.inativar();
         professorRepository.save(professor);
     }
@@ -98,7 +99,7 @@ public class ProfessorService {
     @Transactional
     public void ativar(Long id) {
         var professor = professorRepository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Professor não encontrado(a)!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Professor não encontrado(a)!"));
         professor.ativar();
         professorRepository.save(professor);
     }

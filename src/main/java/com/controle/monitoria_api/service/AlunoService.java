@@ -1,6 +1,7 @@
 package com.controle.monitoria_api.service;
 
-import com.controle.monitoria_api.exceptions.ValidacaoException;
+import com.controle.monitoria_api.service.exceptions.RecursoNaoEncontradoException;
+import com.controle.monitoria_api.service.exceptions.ValidacaoException;
 import com.controle.monitoria_api.model.Aluno;
 import com.controle.monitoria_api.model.dto.request.aluno.AlunoAtualizacaoDTO;
 import com.controle.monitoria_api.model.dto.request.aluno.AlunoCriacaoDTO;
@@ -46,14 +47,14 @@ public class AlunoService {
 
     public AlunoResponseDTO listarPorId(Long id) {
         var aluno = repository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Aluno não encontrado!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Aluno não encontrado!"));
         return new AlunoResponseDTO(aluno);
     }
 
     @Transactional
     public AlunoResponseDTO atualizar(AlunoAtualizacaoDTO dto) {
         var aluno = repository.findById(dto.id())
-                .orElseThrow(() -> new ValidacaoException("Aluno não encontrado!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Aluno não encontrado!"));
 
         if (dto.matricula() != null && !dto.matricula().equals(aluno.getMatricula())) {
             if (repository.existsByMatricula(dto.matricula())) {
@@ -68,7 +69,7 @@ public class AlunoService {
     @Transactional
     public void inativar(Long id) {
         var aluno = repository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Aluno não encontrado!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Aluno não encontrado!"));
         aluno.inativar();
         repository.save(aluno);
     }
@@ -76,7 +77,7 @@ public class AlunoService {
     @Transactional
     public void ativar(Long id) {
         var aluno = repository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Aluno não encontrado!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Aluno não encontrado!"));
         aluno.ativar();
         repository.save(aluno);
     }

@@ -1,6 +1,7 @@
 package com.controle.monitoria_api.service;
 
-import com.controle.monitoria_api.exceptions.ValidacaoException;
+import com.controle.monitoria_api.service.exceptions.RecursoNaoEncontradoException;
+import com.controle.monitoria_api.service.exceptions.ValidacaoException;
 import com.controle.monitoria_api.model.Disciplina;
 import com.controle.monitoria_api.model.Escola;
 import com.controle.monitoria_api.model.dto.request.disciplina.DisciplinaAtualizacaoDTO;
@@ -25,7 +26,7 @@ public class DisciplinaService {
     @Transactional
     public DisciplinaResponseDTO criar(DisciplinaCriacaoDTO dto) {
         var escola = escolaRepository.findById(dto.escolaId())
-                .orElseThrow(() -> new ValidacaoException("Escola não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Escola não encontrada!"));
 
         if (disciplinaRepository.existsBySigla(dto.sigla())) {
             throw new ValidacaoException("Já existe uma disciplina com esta sigla!");
@@ -53,7 +54,7 @@ public class DisciplinaService {
 
     public Page<DisciplinaResponseDTO> listarPorEscola(Long escolaId, Pageable paginacao) {
         if (!escolaRepository.existsById(escolaId)) {
-            throw new ValidacaoException("Escola não encontrada!");
+            throw new RecursoNaoEncontradoException("Escola não encontrada!");
         }
         return disciplinaRepository.findByEscolaId(escolaId, paginacao)
                 .map(DisciplinaResponseDTO::new);
@@ -61,19 +62,19 @@ public class DisciplinaService {
 
     public DisciplinaResponseDTO buscarPorId(Long id) {
         var disciplina = disciplinaRepository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Disciplina não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Disciplina não encontrada!"));
         return new DisciplinaResponseDTO(disciplina);
     }
 
     @Transactional
     public DisciplinaResponseDTO atualizar(DisciplinaAtualizacaoDTO dto) {
         var disciplina = disciplinaRepository.findById(dto.id())
-                .orElseThrow(() -> new ValidacaoException("Disciplina não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Disciplina não encontrada!"));
 
         Escola novaEscola = null;
         if (dto.escolaId() != null) {
             novaEscola = escolaRepository.findById(dto.escolaId())
-                    .orElseThrow(() -> new ValidacaoException("Escola não encontrada!"));
+                    .orElseThrow(() -> new RecursoNaoEncontradoException("Escola não encontrada!"));
         }
 
         validarSiglaUnicaNaAtualizacao(dto, disciplina);
@@ -85,7 +86,7 @@ public class DisciplinaService {
     @Transactional
     public void inativar(Long id) {
         var disciplina = disciplinaRepository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Disciplina não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Disciplina não encontrada!"));
         disciplina.inativar();
         disciplinaRepository.save(disciplina);
     }
@@ -93,7 +94,7 @@ public class DisciplinaService {
     @Transactional
     public void ativar(Long id) {
         var disciplina = disciplinaRepository.findById(id)
-                .orElseThrow(() -> new ValidacaoException("Disciplina não encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Disciplina não encontrada!"));
         disciplina.ativar();
         disciplinaRepository.save(disciplina);
     }
