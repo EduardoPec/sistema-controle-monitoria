@@ -9,9 +9,6 @@ public interface FormacaoRepository extends JpaRepository<Formacao, Long> {
 
     Page<Formacao> findByProfessorId(Long professorId, Pageable paginacao);
 
-    boolean existsByProfessorIdAndTitulacaoAndNomeCursoAndInstituicao(
-            Long professorId, String titulacao, String nomeCurso, String instituicao);
-
-    boolean existsByProfessorIdAndTitulacaoAndNomeCursoAndInstituicaoAndIdNot(
-            Long professorId, String titulacao, String nomeCurso, String instituicao, Long id);
+    boolean existsByProfessorIdAndTitulacaoAndNomeCursoAndInstituicao(Long professorId, String titulacao, String nomeCurso, String instituicao);
+    boolean existsByProfessorIdAndTitulacaoAndNomeCursoAndInstituicaoAndIdNot(Long professorId, String titulacao, String nomeCurso, String instituicao, Long id);
 }

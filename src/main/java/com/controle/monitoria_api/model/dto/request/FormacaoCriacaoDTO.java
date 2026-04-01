@@ -4,22 +4,22 @@ import jakarta.validation.constraints.*;
 
 public record FormacaoCriacaoDTO(
 
-        @NotNull(message = "O professor é obrigatório!")
+        @NotNull(message = "Professor é obrigatório!")
         Long professorId,
 
-        @NotBlank(message = "A titulação é obrigatória!")
-        @Size(max = 50, message = "A titulação deve ter no máximo 50 caracteres!")
+        @NotBlank(message = "Titulação é obrigatória!")
+        @Size(max = 50, message = "Titulação deve ter no máximo 50 caracteres!")
         String titulacao,
 
-        @NotBlank(message = "A instituição é obrigatória!")
-        @Size(max = 150, message = "A instituição deve ter no máximo 150 caracteres!")
+        @NotBlank(message = "Instituição é obrigatória!")
+        @Size(max = 150, message = "Instituição deve ter no máximo 150 caracteres!")
         String instituicao,
 
-        @NotBlank(message = "O nome do curso é obrigatório!")
-        @Size(max = 150, message = "O nome do curso deve ter no máximo 150 caracteres!")
+        @NotBlank(message = "Nome do curso é obrigatório!")
+        @Size(max = 150, message = "Nome do curso deve ter no máximo 150 caracteres!")
         String nomeCurso,
 
-        @NotNull(message = "O ano de conclusão é obrigatório!")
+        @NotNull(message = "Ano de conclusão é obrigatório!")
         @Min(value = 1900, message = "Ano de conclusão inválido!")
         @Max(value = 2100, message = "Ano de conclusão inválido!")
         Integer anoConclusao
