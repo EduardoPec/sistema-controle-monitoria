@@ -1,5 +1,6 @@
 package com.controle.monitoria_api.service;
 
+import com.controle.monitoria_api.model.enums.Titulacao;
 import com.controle.monitoria_api.service.exceptions.RecursoNaoEncontradoException;
 import com.controle.monitoria_api.service.exceptions.ValidacaoException;
 import com.controle.monitoria_api.model.Formacao;
@@ -76,7 +77,7 @@ public class FormacaoService {
     }
 
     private void validarDuplicidadeNaAtualizacao(FormacaoAtualizacaoDTO dto, Formacao formacao) {
-        String titulacaoFinal = dto.titulacao() != null ? dto.titulacao() : formacao.getTitulacao();
+        Titulacao titulacaoFinal = dto.titulacao() != null ? dto.titulacao() : formacao.getTitulacao();
         String nomeCursoFinal = dto.nomeCurso() != null ? dto.nomeCurso() : formacao.getNomeCurso();
         String instituicaoFinal = dto.instituicao() != null ? dto.instituicao() : formacao.getInstituicao();
 

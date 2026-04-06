@@ -5,6 +5,8 @@ import com.controle.monitoria_api.service.exceptions.ValidacaoException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -39,6 +41,33 @@ public class GlobalExceptionHandler {
         for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
             err.addErro(fieldError.getField(), fieldError.getDefaultMessage());
         }
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<StandardError> credenciaisInvalidas(BadCredentialsException e, HttpServletRequest request) {
+        String erro = "Credenciais inválidas!";
+        HttpStatus status = HttpStatus.UNAUTHORIZED;
+        String mensagem = "Usuário ou senha incorretos!";
+        StandardError err = new StandardError(Instant.now(), status.value(), erro, mensagem, request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<StandardError> erroNaAutenticacao(AuthenticationException e, HttpServletRequest request) {
+        String erro = "Erro de autenticação!";
+        HttpStatus status = HttpStatus.UNAUTHORIZED;
+        String mensagem = "Credenciais inválidas ou token não informado!";
+        StandardError err = new StandardError(Instant.now(), status.value(), erro, mensagem, request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<StandardError> erroGenerico(Exception e, HttpServletRequest request) {
+        String erro = "Erro interno do servidor!";
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        String mensagem = "Ocorreu um erro inesperado. Tente novamente mais tarde.";
+        StandardError err = new StandardError(Instant.now(), status.value(), erro, mensagem, request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 }

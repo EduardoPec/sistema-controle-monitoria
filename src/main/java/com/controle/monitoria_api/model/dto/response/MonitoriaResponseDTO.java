@@ -1,6 +1,8 @@
 package com.controle.monitoria_api.model.dto.response;
 
 import com.controle.monitoria_api.model.Monitoria;
+import com.controle.monitoria_api.model.enums.StatusMonitoria;
+import com.controle.monitoria_api.model.enums.TipoMonitoria;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,12 +13,12 @@ public record MonitoriaResponseDTO(
         DisciplinaResponseDTO disciplina,
         ProfessorResponseDTO professor,
         String semestre,
-        String tipoMonitoria,
+        TipoMonitoria tipoMonitoria,
         String local,
         LocalDate dataInicio,
         LocalDate dataFim,
         LocalDateTime dataCadastro,
-        String status) {
+        StatusMonitoria status) {
 
     public MonitoriaResponseDTO(Monitoria monitoria) {
         this(

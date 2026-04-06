@@ -15,3 +15,8 @@ spring:
         format_sql: true
     hibernate:
       ddl-auto: update
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:12345678}
