@@ -141,7 +141,7 @@ public class DisciplinaController {
             @ApiResponse(responseCode = "404", description = "Disciplina não encontrada")
     })
     public ResponseEntity<DisciplinaResponseDTO> listarPorId(@PathVariable Long id) {
-        var disciplina = service.buscarPorId(id);
+        var disciplina = service.listarPorId(id);
         return ResponseEntity.ok(disciplina);
     }
 

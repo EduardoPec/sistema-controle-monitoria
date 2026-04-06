@@ -60,7 +60,7 @@ public class DisciplinaService {
                 .map(DisciplinaResponseDTO::new);
     }
 
-    public DisciplinaResponseDTO buscarPorId(Long id) {
+    public DisciplinaResponseDTO listarPorId(Long id) {
         var disciplina = disciplinaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Disciplina não encontrada!"));
         return new DisciplinaResponseDTO(disciplina);
