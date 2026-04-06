@@ -1,9 +1,11 @@
 package com.controle.monitoria_api.model.dto.request.disciplina;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
+@Schema(name = "DisciplinaAtualizacaoDTO", description = "DTO para atualização de dados de uma disciplina")
 public record DisciplinaAtualizacaoDTO(
         @NotNull(message = "ID é obrigatório!")
         Long id,

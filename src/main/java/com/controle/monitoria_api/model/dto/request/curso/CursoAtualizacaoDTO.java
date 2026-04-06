@@ -1,9 +1,11 @@
 package com.controle.monitoria_api.model.dto.request.curso;
 
 import com.controle.monitoria_api.model.enums.TurnoCurso;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+@Schema(name = "CursoAtualizacaoDTO", description = "DTO para atualização de dados de um curso")
 public record CursoAtualizacaoDTO(
         @NotNull(message = "ID é obrigatório!")
         Long id,

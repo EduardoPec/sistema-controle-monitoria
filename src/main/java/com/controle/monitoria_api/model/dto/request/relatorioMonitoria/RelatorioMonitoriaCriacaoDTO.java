@@ -1,9 +1,11 @@
 package com.controle.monitoria_api.model.dto.request.relatorioMonitoria;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
+@Schema(name = "RelatorioMonitoriaCriacaoDTO", description = "DTO para criação de relatório de monitoria")
 public record RelatorioMonitoriaCriacaoDTO(
         @NotNull(message = "ID da monitoria é obrigatório!")
         Long monitoriaId,

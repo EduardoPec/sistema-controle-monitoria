@@ -1,8 +1,10 @@
 package com.controle.monitoria_api.model.dto.request.matrizCurricular;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+@Schema(name = "MatrizCurricularAtualizacaoDTO", description = "DTO para atualização de uma matriz curricular")
 public record MatrizCurricularAtualizacaoDTO(
         @NotNull(message = "ID é obrigatório!")
         Long id,

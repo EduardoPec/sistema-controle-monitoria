@@ -1,8 +1,10 @@
 package com.controle.monitoria_api.model.dto.request.formacao;
 
 import com.controle.monitoria_api.model.enums.Titulacao;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 
+@Schema(name = "FormacaoCriacaoDTO", description = "DTO para cadastro de uma formação acadêmica de professor")
 public record FormacaoCriacaoDTO(
 
         @NotNull(message = "Professor é obrigatório!")

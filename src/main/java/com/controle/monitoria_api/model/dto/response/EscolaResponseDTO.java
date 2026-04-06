@@ -1,9 +1,11 @@
 package com.controle.monitoria_api.model.dto.response;
 
 import com.controle.monitoria_api.model.Escola;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDateTime;
 
+@Schema(name = "EscolaResponseDTO", description = "DTO de resposta com os dados de uma escola")
 public record EscolaResponseDTO(
         Long id,
         String nome,

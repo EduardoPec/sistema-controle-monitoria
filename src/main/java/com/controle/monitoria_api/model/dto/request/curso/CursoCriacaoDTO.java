@@ -1,10 +1,12 @@
 package com.controle.monitoria_api.model.dto.request.curso;
 
 import com.controle.monitoria_api.model.enums.TurnoCurso;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+@Schema(name = "CursoCriacaoDTO", description = "DTO para cadastro de um novo curso")
 public record CursoCriacaoDTO(
         @NotBlank(message = "Sigla é obrigatória!")
         @Size(max = 20, message = "Sigla deve ter no máximo 20 caracteres")
