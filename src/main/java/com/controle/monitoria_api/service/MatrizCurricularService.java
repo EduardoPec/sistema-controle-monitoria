@@ -25,15 +25,15 @@ public class MatrizCurricularService {
 
     @Transactional
     public MatrizCurricularResponseDTO criar(MatrizCurricularCriacaoDTO dto) {
-        Curso curso = cursoRepository.findById(dto.cursoId())
+        var curso = cursoRepository.findById(dto.cursoId())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Curso não encontrado!"));
 
         if (matrizRepository.existsByNomeAndCursoId(dto.nome(), dto.cursoId())) {
             throw new ValidacaoException("Já existe uma matriz com este nome para este curso!");
         }
 
-        MatrizCurricular matriz = new MatrizCurricular(dto, curso);
-        MatrizCurricular salva = matrizRepository.save(matriz);
+        var matriz = new MatrizCurricular(dto, curso);
+        var salva = matrizRepository.save(matriz);
         return new MatrizCurricularResponseDTO(salva);
     }
 
@@ -61,20 +61,20 @@ public class MatrizCurricularService {
     }
 
     public MatrizCurricularResponseDTO listarPorId(Long id) {
-        MatrizCurricular matriz = matrizRepository.findById(id)
+        var matriz = matrizRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Matriz não encontrada!"));
         return new MatrizCurricularResponseDTO(matriz);
     }
 
     public MatrizCurricularResponseDTO listarMatrizAtivaPorCurso(Long cursoId) {
-        MatrizCurricular matriz = matrizRepository.findByCursoIdAndAtivoTrue(cursoId)
+        var matriz = matrizRepository.findByCursoIdAndAtivoTrue(cursoId)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Nenhuma matriz ativa encontrada para este curso!"));
         return new MatrizCurricularResponseDTO(matriz);
     }
 
     @Transactional
     public MatrizCurricularResponseDTO atualizar(MatrizCurricularAtualizacaoDTO dto) {
-        MatrizCurricular matriz = matrizRepository.findById(dto.id())
+        var matriz = matrizRepository.findById(dto.id())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Matriz não encontrada!"));
 
         Curso novoCurso = null;
@@ -91,7 +91,7 @@ public class MatrizCurricularService {
 
     @Transactional
     public void ativar(Long id) {
-        MatrizCurricular matriz = matrizRepository.findById(id)
+        var matriz = matrizRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Matriz não encontrada!"));
 
         validarNaoExisteOutraAtiva(matriz.getCurso().getId());
@@ -102,7 +102,7 @@ public class MatrizCurricularService {
 
     @Transactional
     public void inativar(Long id) {
-        MatrizCurricular matriz = matrizRepository.findById(id)
+        var matriz = matrizRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Matriz não encontrada!"));
         matriz.inativar();
         matrizRepository.save(matriz);
