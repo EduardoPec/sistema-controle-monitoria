@@ -1,12 +1,14 @@
 package com.controle.monitoria_api.model.dto.request.monitoria;
 
 import com.controle.monitoria_api.model.enums.TipoMonitoria;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
+@Schema(name = "MonitoriaAtualizacaoDTO", description = "DTO para atualização de uma monitoria existente")
 public record MonitoriaAtualizacaoDTO(
         @NotNull(message = "ID é obrigatório!")
         Long id,

@@ -3,10 +3,12 @@ package com.controle.monitoria_api.model.dto.response;
 import com.controle.monitoria_api.model.Monitoria;
 import com.controle.monitoria_api.model.enums.StatusMonitoria;
 import com.controle.monitoria_api.model.enums.TipoMonitoria;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Schema(name = "MonitoriaResponseDTO", description = "DTO de resposta com os dados de uma monitoria")
 public record MonitoriaResponseDTO(
         Long id,
         AlunoResponseDTO aluno,

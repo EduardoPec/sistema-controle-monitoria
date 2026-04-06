@@ -2,9 +2,11 @@ package com.controle.monitoria_api.model.dto.response;
 
 import com.controle.monitoria_api.model.Curso;
 import com.controle.monitoria_api.model.enums.TurnoCurso;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDateTime;
 
+@Schema(name = "CursoResponseDTO", description = "DTO de resposta com os dados de um curso")
 public record CursoResponseDTO(
         Long id,
         String sigla,

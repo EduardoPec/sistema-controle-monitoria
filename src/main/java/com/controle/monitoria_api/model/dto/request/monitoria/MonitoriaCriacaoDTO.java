@@ -1,10 +1,12 @@
 package com.controle.monitoria_api.model.dto.request.monitoria;
 
 import com.controle.monitoria_api.model.enums.TipoMonitoria;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 
+@Schema(name = "MonitoriaCriacaoDTO", description = "DTO para cadastro de uma nova monitoria")
 public record MonitoriaCriacaoDTO(
         @NotNull(message = "Aluno é obrigatório!")
         Long alunoId,

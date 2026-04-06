@@ -58,6 +58,7 @@ public class SecurityConfiguration {
 
                             .requestMatchers(HttpMethod.POST, "/monitorias").hasAnyRole("ADMIN", "PROFESSOR")
                             .requestMatchers(HttpMethod.POST, "/formacoes").hasAnyRole("ADMIN", "PROFESSOR")
+                            .requestMatchers(HttpMethod.POST, "/relatorios-monitoria").hasAnyRole("ADMIN", "PROFESSOR")
                             .requestMatchers(HttpMethod.PUT, "/formacoes").hasAnyRole("ADMIN", "PROFESSOR")
                             .requestMatchers(HttpMethod.PATCH, "/monitorias/*/finalizar").hasAnyRole("ADMIN", "PROFESSOR")
 
