@@ -2,6 +2,7 @@ package com.controle.monitoria_api.model;
 
 import com.controle.monitoria_api.model.dto.request.curso.CursoAtualizacaoDTO;
 import com.controle.monitoria_api.model.dto.request.curso.CursoCriacaoDTO;
+import com.controle.monitoria_api.model.enums.TurnoCurso;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -32,8 +33,9 @@ public class Curso {
     @JoinColumn(name = "escola_id", nullable = false)
     private Escola escola;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private String turno;
+    private TurnoCurso turno;
 
     @Column(nullable = false, length = 100)
     private String coordenador;

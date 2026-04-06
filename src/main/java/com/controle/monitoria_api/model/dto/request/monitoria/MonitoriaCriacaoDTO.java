@@ -1,5 +1,6 @@
 package com.controle.monitoria_api.model.dto.request.monitoria;
 
+import com.controle.monitoria_api.model.enums.TipoMonitoria;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
@@ -14,9 +15,8 @@ public record MonitoriaCriacaoDTO(
         @NotBlank(message = "Semestre é obrigatório!")
         @Size(max = 20, message = "Semestre deve ter no máximo 20 caracteres!")
         String semestre,
-        @NotBlank(message = "Tipo de monitoria é obrigatório!")
-        @Pattern(regexp = "PRESENCIAL|REMOTO", message = "Tipo deve ser PRESENCIAL ou REMOTO!")
-        String tipoMonitoria,
+        @NotNull(message = "Tipo de monitoria é obrigatório!")
+        TipoMonitoria tipoMonitoria,
         @NotBlank(message = "Local é obrigatório!")
         @Size(max = 200, message = "Local deve ter no máximo 200 caracteres!")
         String local,

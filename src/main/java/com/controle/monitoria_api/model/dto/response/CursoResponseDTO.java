@@ -1,6 +1,7 @@
 package com.controle.monitoria_api.model.dto.response;
 
 import com.controle.monitoria_api.model.Curso;
+import com.controle.monitoria_api.model.enums.TurnoCurso;
 
 import java.time.LocalDateTime;
 
@@ -9,7 +10,7 @@ public record CursoResponseDTO(
         String sigla,
         String descricao,
         EscolaResponseDTO escola,
-        String turno,
+        TurnoCurso turno,
         String coordenador,
         LocalDateTime dataCadastro,
         Boolean ativo) {

@@ -1,5 +1,6 @@
 package com.controle.monitoria_api.model.dto.request.curso;
 
+import com.controle.monitoria_api.model.enums.TurnoCurso;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -11,8 +12,7 @@ public record CursoAtualizacaoDTO(
         @Size(max = 200, message = "Descrição deve ter no máximo 200 caracteres")
         String descricao,
         Long escolaId,
-        @Size(max = 20, message = "Turno deve ter no máximo 20 caracteres")
-        String turno,
+        TurnoCurso turno,
         @Size(max = 100, message = "Coordenador deve ter no máximo 100 caracteres")
         String coordenador) {
 }

@@ -2,6 +2,7 @@ package com.controle.monitoria_api.model;
 
 import com.controle.monitoria_api.model.dto.request.formacao.FormacaoCriacaoDTO;
 import com.controle.monitoria_api.model.dto.request.formacao.FormacaoAtualizacaoDTO;
+import com.controle.monitoria_api.model.enums.Titulacao;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -24,8 +25,9 @@ public class Formacao {
     @JoinColumn(name = "professor_id", nullable = false)
     private Professor professor;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
-    private String titulacao;
+    private Titulacao titulacao;
 
     @Column(nullable = false, length = 150)
     private String instituicao;

@@ -43,6 +43,10 @@ public class MonitoriaService {
             throw new ValidacaoException("Aluno já é monitor nesta disciplina neste semestre!");
         }
 
+        if (dto.dataInicio().isAfter(dto.dataFim()) || dto.dataInicio().isEqual(dto.dataFim())) {
+            throw new ValidacaoException("Data de início deve ser anterior à data de fim!");
+        }
+
         var monitoria = new Monitoria(dto, aluno, disciplina, professor);
         var salvar = monitoriaRepository.save(monitoria);
         return new MonitoriaResponseDTO(salvar);

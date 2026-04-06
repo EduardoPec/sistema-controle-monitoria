@@ -1,12 +1,13 @@
 package com.controle.monitoria_api.model.dto.response;
 
 import com.controle.monitoria_api.model.Formacao;
+import com.controle.monitoria_api.model.enums.Titulacao;
 
 public record FormacaoResponseDTO(
         Long id,
         Long professorId,
         String professorNome,
-        String titulacao,
+        Titulacao titulacao,
         String instituicao,
         String nomeCurso,
         Integer anoConclusao
