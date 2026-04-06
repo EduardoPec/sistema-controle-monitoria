@@ -33,10 +33,10 @@ public class MonitoriaService {
         var aluno = alunoRepository.findById(dto.alunoId())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Aluno não encontrado!"));
 
-        Disciplina disciplina = disciplinaRepository.findById(dto.disciplinaId())
+        var disciplina = disciplinaRepository.findById(dto.disciplinaId())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Disciplina não encontrada!"));
 
-        Professor professor = professorRepository.findById(dto.professorId())
+        var professor = professorRepository.findById(dto.professorId())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Professor não encontrado!"));
 
         if (monitoriaRepository.existsByAlunoIdAndDisciplinaIdAndSemestreAndStatusNot(dto.alunoId(), dto.disciplinaId(), dto.semestre(), "FINALIZADA")) {
