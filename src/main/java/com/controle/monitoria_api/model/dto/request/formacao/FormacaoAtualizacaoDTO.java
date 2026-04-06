@@ -1,8 +1,10 @@
 package com.controle.monitoria_api.model.dto.request.formacao;
 
 import com.controle.monitoria_api.model.enums.Titulacao;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 
+@Schema(name = "FormacaoAtualizacaoDTO", description = "DTO para atualização de uma formação acadêmica")
 public record FormacaoAtualizacaoDTO(
 
         @NotNull(message = "ID é obrigatório!")

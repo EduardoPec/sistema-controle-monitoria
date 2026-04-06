@@ -1,10 +1,12 @@
 package com.controle.monitoria_api.model.dto.request.professor;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+@Schema(name = "ProfessorCriacaoDTO", description = "DTO para cadastro de um novo professor")
 public record ProfessorCriacaoDTO(
         @NotBlank(message = "Matrícula é obrigatória!")
         @Size(max = 20, message = "Matrícula deve ter no máximo 20 caracteres")
