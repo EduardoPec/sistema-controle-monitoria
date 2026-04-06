@@ -1,5 +1,6 @@
 package com.controle.monitoria_api.model.dto.request.formacao;
 
+import com.controle.monitoria_api.model.enums.Titulacao;
 import jakarta.validation.constraints.*;
 
 public record FormacaoAtualizacaoDTO(
@@ -7,8 +8,7 @@ public record FormacaoAtualizacaoDTO(
         @NotNull(message = "ID é obrigatório!")
         Long id,
 
-        @Size(max = 50, message = "Titulação deve ter no máximo 50 caracteres!")
-        String titulacao,
+        Titulacao titulacao,
 
         @Size(max = 150, message = "Instituição deve ter no máximo 150 caracteres!")
         String instituicao,

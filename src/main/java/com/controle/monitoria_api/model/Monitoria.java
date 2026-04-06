@@ -2,6 +2,8 @@ package com.controle.monitoria_api.model;
 
 import com.controle.monitoria_api.model.dto.request.monitoria.MonitoriaCriacaoDTO;
 import com.controle.monitoria_api.model.dto.request.monitoria.MonitoriaAtualizacaoDTO;
+import com.controle.monitoria_api.model.enums.StatusMonitoria;
+import com.controle.monitoria_api.model.enums.TipoMonitoria;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -38,8 +40,9 @@ public class Monitoria {
     @Column(nullable = false, length = 20)
     private String semestre;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo_monitoria", nullable = false, length = 20)
-    private String tipoMonitoria;
+    private TipoMonitoria tipoMonitoria;
 
     @Column(nullable = false, length = 200)
     private String local;
@@ -53,8 +56,9 @@ public class Monitoria {
     @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private String status;
+    private StatusMonitoria status;
 
     @OneToOne(mappedBy = "monitoria", cascade = CascadeType.ALL)
     private RelatorioMonitoria relatorio;
@@ -68,7 +72,7 @@ public class Monitoria {
         this.local = dto.local();
         this.dataInicio = dto.dataInicio();
         this.dataFim = dto.dataFim();
-        this.status = "EM_ANDAMENTO";
+        this.status = StatusMonitoria.EM_ANDAMENTO;
     }
 
     @PrePersist
@@ -104,14 +108,14 @@ public class Monitoria {
     }
 
     public void finalizar() {
-        this.status = "FINALIZADA";
+        this.status = StatusMonitoria.FINALIZADA;
     }
 
     public boolean isEmAndamento() {
-        return "EM_ANDAMENTO".equals(this.status);
+        return StatusMonitoria.EM_ANDAMENTO.equals(this.status);
     }
 
     public boolean isFinalizada() {
-        return "FINALIZADA".equals(this.status);
+        return StatusMonitoria.FINALIZADA.equals(this.status);
     }
 }
