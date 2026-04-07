@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Sistema de Controle de Monitoria de Alunos
 =======
 # 🎓 Sistema de Controle de Monitoria de Alunos - Backend
 >>>>>>> 44190dc (Update README.md)
+=======
+# Sistema de Controle de Monitoria de Alunos
+>>>>>>> ff765e3 (Update README.md)
 
 API RESTful para gerenciamento completo de monitoria acadêmica, desenvolvida com **Java Spring Boot**. O sistema permite o cadastro e controle de IES, escolas, cursos, disciplinas, matrizes curriculares, professores, alunos e monitorias.
 
@@ -12,15 +16,19 @@ API RESTful para gerenciamento completo de monitoria acadêmica, desenvolvida co
 [![JWT](https://img.shields.io/badge/JWT-Authentication-orange.svg)](https://jwt.io/)
 [![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-green.svg)](https://swagger.io/)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 >>>>>>> 44190dc (Update README.md)
+=======
+>>>>>>> ff765e3 (Update README.md)
 
 ---
 
 ## 📋 Índice
 
 - [Sobre o Projeto](#sobre-o-projeto)
+<<<<<<< HEAD
 <<<<<<< HEAD
 - [Tecnologias](#tecnologias)
 - [Pré-requisitos](#pré-requisitos)
@@ -36,23 +44,32 @@ API RESTful para gerenciamento completo de monitoria acadêmica, desenvolvida co
 =======
 - [Funcionalidades por Perfil](#funcionalidades-por-perfil)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
+=======
+- [Tecnologias](#tecnologias)
+>>>>>>> ff765e3 (Update README.md)
 - [Pré-requisitos](#pré-requisitos)
-- [Configuração do Banco de Dados](#configuração-do-banco-de-dados)
-- [Configuração da Aplicação](#configuração-da-aplicação)
+- [Configuração](#configuração)
 - [Instalação e Execução](#instalação-e-execução)
 - [Estrutura do Projeto](#estrutura-do-projeto)
-- [Documentação da API](#documentação-da-api)
 - [Autenticação](#autenticação)
 - [Perfis de Acesso](#perfis-de-acesso)
-- [Principais Endpoints](#principais-endpoints)
+- [Endpoints](#endpoints)
 - [Regras de Negócio](#regras-de-negócio)
+<<<<<<< HEAD
 >>>>>>> 44190dc (Update README.md)
+=======
+- [Tratamento de Erros](#tratamento-de-erros)
+- [Documentação da API](#documentação-da-api)
+>>>>>>> ff765e3 (Update README.md)
 
 ---
 
 ## 📖 Sobre o Projeto
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ff765e3 (Update README.md)
 API para gerenciamento de monitoria acadêmica, permitindo o controle de:
 
 - Instituições de Ensino Superior (IES)
@@ -60,6 +77,7 @@ API para gerenciamento de monitoria acadêmica, permitindo o controle de:
 - Matrizes Curriculares e Pré-requisitos
 - Professores e Alunos
 - Monitorias e Relatórios
+<<<<<<< HEAD
 
 ---
 
@@ -84,11 +102,14 @@ API para gerenciamento de monitoria acadêmica, permitindo o controle de:
 | SpringDoc OpenAPI | 3.0.2 |
 =======
 Este projeto é uma API backend para gerenciamento de monitoria acadêmica, desenvolvida como parte de um projeto acadêmico. O sistema atende às necessidades de instituições de ensino que desejam controlar todo o processo de monitoria, desde o cadastro de IES e escolas até a geração de relatórios finais.
+=======
+>>>>>>> ff765e3 (Update README.md)
 
 ---
 
-## 👥 Funcionalidades por Perfil
+## 🛠️ Tecnologias
 
+<<<<<<< HEAD
 ### Perfil ADMIN (Acesso Total)
 
 O administrador tem acesso **TOTAL** a todas as operações em todas as entidades do sistema.
@@ -142,11 +163,25 @@ O professor tem acesso de **LEITURA** a todas as entidades + operações especí
 | **SpringDoc OpenAPI** | 3.0.2 | Documentação interativa da API |
 | **Maven** | - | Gerenciador de dependências |
 >>>>>>> 44190dc (Update README.md)
+=======
+| Tecnologia | Versão |
+|------------|--------|
+| Java | 21 |
+| Spring Boot | 4.0.5 |
+| Spring Security | 7.0.4 |
+| Spring Data JPA | 4.0.4 |
+| PostgreSQL | 17+ |
+| Hibernate | 7.2.7 |
+| JWT | 4.2.1 |
+| Lombok | 1.18.44 |
+| SpringDoc OpenAPI | 3.0.2 |
+>>>>>>> ff765e3 (Update README.md)
 
 ---
 
 ## 📦 Pré-requisitos
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 - Java 21
 - PostgreSQL 15+
@@ -163,13 +198,22 @@ O professor tem acesso de **LEITURA** a todas as entidades + operações especí
 | **Java JDK** | 21 | `java -version` |
 | **PostgreSQL** | 15 ou superior | `psql --version` |
 | **Maven** | 3.8+ | `mvn -version` |
+=======
+- Java 21
+- PostgreSQL 15+
+- Maven 3.8+
+>>>>>>> ff765e3 (Update README.md)
 
 ---
 
-## 🔧 Configuração do Banco de Dados
+## ⚙️ Configuração
 
+<<<<<<< HEAD
 ### Crie o banco de dados PostgreSQL
 >>>>>>> 44190dc (Update README.md)
+=======
+### Banco de Dados
+>>>>>>> ff765e3 (Update README.md)
 
 ```sql
 CREATE DATABASE monitoria_db;
@@ -178,10 +222,13 @@ CREATE DATABASE monitoria_db;
 ---
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 ## ⚙️ Configuração da Aplicação
 
 >>>>>>> 44190dc (Update README.md)
+=======
+>>>>>>> ff765e3 (Update README.md)
 ### application.yml
 
 ```yaml
@@ -210,6 +257,9 @@ api:
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ff765e3 (Update README.md)
 ⚠️ Importante: Altere seu usuario, sua senha e sua chave para valores reais.
 
 ### Variáveis de Ambiente
@@ -220,9 +270,12 @@ api:
 | `DB_USER` | Usuário do banco de dados | `postgres` |
 | `DB_PASSWORD` | Senha do banco de dados | **obrigatório** |
 | `JWT_SECRET` | Chave secreta para geração do token JWT | `12345678` |
+<<<<<<< HEAD
 =======
 ⚠️ Importante: Altere seu_usuario, sua_senha e sua-chave-secreta-aqui para valores reais.
 >>>>>>> 44190dc (Update README.md)
+=======
+>>>>>>> ff765e3 (Update README.md)
 
 ## 🚀 Instalação e Execução
 
@@ -329,6 +382,7 @@ src/main/java/com/controle/monitoria_api/
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 ## 📚 Documentação da API
 Acesse o Swagger UI para testar todos os endpoints interativamente.
@@ -344,6 +398,8 @@ Acesse http://localhost:8080/swagger-ui.html
 - Agora você pode testar qualquer endpoint
 
 >>>>>>> 44190dc (Update README.md)
+=======
+>>>>>>> ff765e3 (Update README.md)
 ## 🔐 Autenticação
 
 ### Obter um token
@@ -371,10 +427,14 @@ json
 ```
 curl -X GET http://localhost:8080/cursos \
 <<<<<<< HEAD
+<<<<<<< HEAD
   -H "Authorization: Bearer SEU_TOKEN"
 =======
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 >>>>>>> 44190dc (Update README.md)
+=======
+  -H "Authorization: Bearer SEU_TOKEN"
+>>>>>>> ff765e3 (Update README.md)
 ```
 
 ## 👥 Perfis de Acesso
@@ -644,6 +704,9 @@ O professor tem acesso de **leitura** a todas as entidades e permissões especí
 - Matrícula do aluno deve ser **única** no sistema
 - Aluno pode ser **inativado** (soft delete), mas não excluído fisicamente
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ff765e3 (Update README.md)
 
 ---
 
@@ -709,5 +772,8 @@ http://localhost:8080/swagger-ui.html
 4. Insira o token no formato: `Bearer {seu-token}`
 5. Clique em **Authorize**
 6. Agora você pode testar qualquer endpoint protegido
+<<<<<<< HEAD
 =======
 >>>>>>> 44190dc (Update README.md)
+=======
+>>>>>>> ff765e3 (Update README.md)
