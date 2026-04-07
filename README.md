@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Sistema de Controle de Monitoria de Alunos
+=======
+# 🎓 Sistema de Controle de Monitoria de Alunos - Backend
+>>>>>>> 44190dc (Update README.md)
 
 API RESTful para gerenciamento completo de monitoria acadêmica, desenvolvida com **Java Spring Boot**. O sistema permite o cadastro e controle de IES, escolas, cursos, disciplinas, matrizes curriculares, professores, alunos e monitorias.
 
@@ -7,12 +11,17 @@ API RESTful para gerenciamento completo de monitoria acadêmica, desenvolvida co
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17%2B-blue.svg)](https://www.postgresql.org/)
 [![JWT](https://img.shields.io/badge/JWT-Authentication-orange.svg)](https://jwt.io/)
 [![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-green.svg)](https://swagger.io/)
+<<<<<<< HEAD
+=======
+[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
+>>>>>>> 44190dc (Update README.md)
 
 ---
 
 ## 📋 Índice
 
 - [Sobre o Projeto](#sobre-o-projeto)
+<<<<<<< HEAD
 - [Tecnologias](#tecnologias)
 - [Pré-requisitos](#pré-requisitos)
 - [Configuração](#configuração)
@@ -24,11 +33,26 @@ API RESTful para gerenciamento completo de monitoria acadêmica, desenvolvida co
 - [Regras de Negócio](#regras-de-negócio)
 - [Tratamento de Erros](#tratamento-de-erros)
 - [Documentação da API](#documentação-da-api)
+=======
+- [Funcionalidades por Perfil](#funcionalidades-por-perfil)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Pré-requisitos](#pré-requisitos)
+- [Configuração do Banco de Dados](#configuração-do-banco-de-dados)
+- [Configuração da Aplicação](#configuração-da-aplicação)
+- [Instalação e Execução](#instalação-e-execução)
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Documentação da API](#documentação-da-api)
+- [Autenticação](#autenticação)
+- [Perfis de Acesso](#perfis-de-acesso)
+- [Principais Endpoints](#principais-endpoints)
+- [Regras de Negócio](#regras-de-negócio)
+>>>>>>> 44190dc (Update README.md)
 
 ---
 
 ## 📖 Sobre o Projeto
 
+<<<<<<< HEAD
 API para gerenciamento de monitoria acadêmica, permitindo o controle de:
 
 - Instituições de Ensino Superior (IES)
@@ -58,11 +82,72 @@ API para gerenciamento de monitoria acadêmica, permitindo o controle de:
 | JWT | 4.2.1 |
 | Lombok | 1.18.44 |
 | SpringDoc OpenAPI | 3.0.2 |
+=======
+Este projeto é uma API backend para gerenciamento de monitoria acadêmica, desenvolvida como parte de um projeto acadêmico. O sistema atende às necessidades de instituições de ensino que desejam controlar todo o processo de monitoria, desde o cadastro de IES e escolas até a geração de relatórios finais.
+
+---
+
+## 👥 Funcionalidades por Perfil
+
+### Perfil ADMIN (Acesso Total)
+
+O administrador tem acesso **TOTAL** a todas as operações em todas as entidades do sistema.
+
+| Funcionalidade | Operações |
+|----------------|-----------|
+| **IES** | Criar, listar, atualizar e excluir |
+| **Escolas** | Criar, listar, atualizar, ativar e inativar |
+| **Cursos** | Criar, listar, atualizar, ativar e inativar |
+| **Disciplinas** | Criar, listar, atualizar, ativar e inativar |
+| **Matrizes Curriculares** | Criar, listar, atualizar, ativar e inativar |
+| **Matrizes-Disciplinas** | Criar, listar, atualizar e excluir |
+| **Professores** | Criar, listar, atualizar, ativar e inativar |
+| **Alunos** | Criar, listar, atualizar, ativar e inativar |
+| **Formações** | Criar, listar, atualizar e excluir |
+| **Monitorias** | Criar, listar, atualizar e finalizar |
+| **Relatórios** | Criar, listar e visualizar |
+
+### Perfil PROFESSOR (Acesso Restrito)
+
+O professor tem acesso de **LEITURA** a todas as entidades + operações específicas para seu trabalho.
+
+| Funcionalidade | Operações |
+|----------------|-----------|
+| **IES** | Apenas leitura (listar) |
+| **Escolas** | Apenas leitura (listar) |
+| **Cursos** | Apenas leitura (listar) |
+| **Disciplinas** | Apenas leitura (listar) |
+| **Matrizes Curriculares** | Apenas leitura (listar) |
+| **Matrizes-Disciplinas** | Apenas leitura (listar) |
+| **Professores** | Apenas leitura (listar) |
+| **Alunos** | Criar e listar |
+| **Formações** | Criar, listar e atualizar (próprias formações) |
+| **Monitorias** | Criar, listar e finalizar |
+| **Relatórios** | Criar e listar |
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+| Tecnologia | Versão | Descrição |
+|------------|--------|-----------|
+| **Java** | 21 | Linguagem de programação |
+| **Spring Boot** | 4.0.5 | Framework principal |
+| **Spring Security** | 7.0.4 | Autenticação e autorização |
+| **Spring Data JPA** | 4.0.4 | Persistência de dados |
+| **PostgreSQL** | 17+ | Banco de dados relacional |
+| **Hibernate** | 7.2.7 | ORM (Object-Relational Mapping) |
+| **JWT (java-jwt)** | 4.2.1 | Tokens de autenticação |
+| **Lombok** | 1.18.44 | Redução de código boilerplate |
+| **SpringDoc OpenAPI** | 3.0.2 | Documentação interativa da API |
+| **Maven** | - | Gerenciador de dependências |
+>>>>>>> 44190dc (Update README.md)
 
 ---
 
 ## 📦 Pré-requisitos
 
+<<<<<<< HEAD
 - Java 21
 - PostgreSQL 15+
 - Maven 3.8+
@@ -72,6 +157,19 @@ API para gerenciamento de monitoria acadêmica, permitindo o controle de:
 ## ⚙️ Configuração
 
 ### Banco de Dados
+=======
+| Ferramenta | Versão | Comando para verificar |
+|------------|--------|------------------------|
+| **Java JDK** | 21 | `java -version` |
+| **PostgreSQL** | 15 ou superior | `psql --version` |
+| **Maven** | 3.8+ | `mvn -version` |
+
+---
+
+## 🔧 Configuração do Banco de Dados
+
+### Crie o banco de dados PostgreSQL
+>>>>>>> 44190dc (Update README.md)
 
 ```sql
 CREATE DATABASE monitoria_db;
@@ -79,6 +177,11 @@ CREATE DATABASE monitoria_db;
 
 ---
 
+<<<<<<< HEAD
+=======
+## ⚙️ Configuração da Aplicação
+
+>>>>>>> 44190dc (Update README.md)
 ### application.yml
 
 ```yaml
@@ -106,6 +209,7 @@ api:
       secret: ${JWT_SECRET:12345678}
 ```
 
+<<<<<<< HEAD
 ⚠️ Importante: Altere seu usuario, sua senha e sua chave para valores reais.
 
 ### Variáveis de Ambiente
@@ -116,6 +220,9 @@ api:
 | `DB_USER` | Usuário do banco de dados | `postgres` |
 | `DB_PASSWORD` | Senha do banco de dados | **obrigatório** |
 | `JWT_SECRET` | Chave secreta para geração do token JWT | `12345678` |
+=======
+⚠️ Importante: Altere seu_usuario, sua_senha e sua-chave-secreta-aqui para valores reais.
+>>>>>>> 44190dc (Update README.md)
 
 ## 🚀 Instalação e Execução
 
@@ -221,6 +328,22 @@ src/main/java/com/controle/monitoria_api/
     └── application.yml
 ```
 
+<<<<<<< HEAD
+=======
+## 📚 Documentação da API
+Acesse o Swagger UI para testar todos os endpoints interativamente.
+
+### Como testar no Swagger UI
+Acesse http://localhost:8080/swagger-ui.html
+
+### Clique no botão Authorize (cadeado)
+
+- Faça login no endpoint POST /login para obter o token
+- Insira o token no formato: Bearer {seu-token}
+- Clique em Authorize
+- Agora você pode testar qualquer endpoint
+
+>>>>>>> 44190dc (Update README.md)
 ## 🔐 Autenticação
 
 ### Obter um token
@@ -247,7 +370,11 @@ json
 
 ```
 curl -X GET http://localhost:8080/cursos \
+<<<<<<< HEAD
   -H "Authorization: Bearer SEU_TOKEN"
+=======
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+>>>>>>> 44190dc (Update README.md)
 ```
 
 ## 👥 Perfis de Acesso
@@ -516,6 +643,7 @@ O professor tem acesso de **leitura** a todas as entidades e permissões especí
 
 - Matrícula do aluno deve ser **única** no sistema
 - Aluno pode ser **inativado** (soft delete), mas não excluído fisicamente
+<<<<<<< HEAD
 
 ---
 
@@ -581,3 +709,5 @@ http://localhost:8080/swagger-ui.html
 4. Insira o token no formato: `Bearer {seu-token}`
 5. Clique em **Authorize**
 6. Agora você pode testar qualquer endpoint protegido
+=======
+>>>>>>> 44190dc (Update README.md)
