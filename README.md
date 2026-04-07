@@ -1,4 +1,4 @@
-# 🎓 Sistema de Controle de Monitoria de Alunos - Backend
+# Sistema de Controle de Monitoria de Alunos
 
 API RESTful para gerenciamento completo de monitoria acadêmica, desenvolvida com **Java Spring Boot**. O sistema permite o cadastro e controle de IES, escolas, cursos, disciplinas, matrizes curriculares, professores, alunos e monitorias.
 
@@ -7,112 +7,71 @@ API RESTful para gerenciamento completo de monitoria acadêmica, desenvolvida co
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17%2B-blue.svg)](https://www.postgresql.org/)
 [![JWT](https://img.shields.io/badge/JWT-Authentication-orange.svg)](https://jwt.io/)
 [![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-green.svg)](https://swagger.io/)
-[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 
 ---
 
 ## 📋 Índice
 
 - [Sobre o Projeto](#sobre-o-projeto)
-- [Funcionalidades por Perfil](#funcionalidades-por-perfil)
-- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Tecnologias](#tecnologias)
 - [Pré-requisitos](#pré-requisitos)
-- [Configuração do Banco de Dados](#configuração-do-banco-de-dados)
-- [Configuração da Aplicação](#configuração-da-aplicação)
+- [Configuração](#configuração)
 - [Instalação e Execução](#instalação-e-execução)
 - [Estrutura do Projeto](#estrutura-do-projeto)
-- [Documentação da API](#documentação-da-api)
 - [Autenticação](#autenticação)
 - [Perfis de Acesso](#perfis-de-acesso)
-- [Principais Endpoints](#principais-endpoints)
+- [Endpoints](#endpoints)
 - [Regras de Negócio](#regras-de-negócio)
+- [Tratamento de Erros](#tratamento-de-erros)
+- [Documentação da API](#documentação-da-api)
 
 ---
 
 ## 📖 Sobre o Projeto
 
-Este projeto é uma API backend para gerenciamento de monitoria acadêmica, desenvolvida como parte de um projeto acadêmico. O sistema atende às necessidades de instituições de ensino que desejam controlar todo o processo de monitoria, desde o cadastro de IES e escolas até a geração de relatórios finais.
+API para gerenciamento de monitoria acadêmica, permitindo o controle de:
+
+- Instituições de Ensino Superior (IES)
+- Escolas, Cursos e Disciplinas
+- Matrizes Curriculares e Pré-requisitos
+- Professores e Alunos
+- Monitorias e Relatórios
 
 ---
 
-## 👥 Funcionalidades por Perfil
+## 🛠️ Tecnologias
 
-### Perfil ADMIN (Acesso Total)
-
-O administrador tem acesso **TOTAL** a todas as operações em todas as entidades do sistema.
-
-| Funcionalidade | Operações |
-|----------------|-----------|
-| **IES** | Criar, listar, atualizar e excluir |
-| **Escolas** | Criar, listar, atualizar, ativar e inativar |
-| **Cursos** | Criar, listar, atualizar, ativar e inativar |
-| **Disciplinas** | Criar, listar, atualizar, ativar e inativar |
-| **Matrizes Curriculares** | Criar, listar, atualizar, ativar e inativar |
-| **Matrizes-Disciplinas** | Criar, listar, atualizar e excluir |
-| **Professores** | Criar, listar, atualizar, ativar e inativar |
-| **Alunos** | Criar, listar, atualizar, ativar e inativar |
-| **Formações** | Criar, listar, atualizar e excluir |
-| **Monitorias** | Criar, listar, atualizar e finalizar |
-| **Relatórios** | Criar, listar e visualizar |
-
-### Perfil PROFESSOR (Acesso Restrito)
-
-O professor tem acesso de **LEITURA** a todas as entidades + operações específicas para seu trabalho.
-
-| Funcionalidade | Operações |
-|----------------|-----------|
-| **IES** | Apenas leitura (listar) |
-| **Escolas** | Apenas leitura (listar) |
-| **Cursos** | Apenas leitura (listar) |
-| **Disciplinas** | Apenas leitura (listar) |
-| **Matrizes Curriculares** | Apenas leitura (listar) |
-| **Matrizes-Disciplinas** | Apenas leitura (listar) |
-| **Professores** | Apenas leitura (listar) |
-| **Alunos** | Criar e listar |
-| **Formações** | Criar, listar e atualizar (próprias formações) |
-| **Monitorias** | Criar, listar e finalizar |
-| **Relatórios** | Criar e listar |
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-| Tecnologia | Versão | Descrição |
-|------------|--------|-----------|
-| **Java** | 21 | Linguagem de programação |
-| **Spring Boot** | 4.0.5 | Framework principal |
-| **Spring Security** | 7.0.4 | Autenticação e autorização |
-| **Spring Data JPA** | 4.0.4 | Persistência de dados |
-| **PostgreSQL** | 17+ | Banco de dados relacional |
-| **Hibernate** | 7.2.7 | ORM (Object-Relational Mapping) |
-| **JWT (java-jwt)** | 4.2.1 | Tokens de autenticação |
-| **Lombok** | 1.18.44 | Redução de código boilerplate |
-| **SpringDoc OpenAPI** | 3.0.2 | Documentação interativa da API |
-| **Maven** | - | Gerenciador de dependências |
+| Tecnologia | Versão |
+|------------|--------|
+| Java | 21 |
+| Spring Boot | 4.0.5 |
+| Spring Security | 7.0.4 |
+| Spring Data JPA | 4.0.4 |
+| PostgreSQL | 17+ |
+| Hibernate | 7.2.7 |
+| JWT | 4.2.1 |
+| Lombok | 1.18.44 |
+| SpringDoc OpenAPI | 3.0.2 |
 
 ---
 
 ## 📦 Pré-requisitos
 
-| Ferramenta | Versão | Comando para verificar |
-|------------|--------|------------------------|
-| **Java JDK** | 21 | `java -version` |
-| **PostgreSQL** | 15 ou superior | `psql --version` |
-| **Maven** | 3.8+ | `mvn -version` |
+- Java 21
+- PostgreSQL 15+
+- Maven 3.8+
 
 ---
 
-## 🔧 Configuração do Banco de Dados
+## ⚙️ Configuração
 
-### Crie o banco de dados PostgreSQL
+### Banco de Dados
 
 ```sql
 CREATE DATABASE monitoria_db;
 ```
 
 ---
-
-## ⚙️ Configuração da Aplicação
 
 ### application.yml
 
@@ -141,7 +100,16 @@ api:
       secret: ${JWT_SECRET:12345678}
 ```
 
-⚠️ Importante: Altere seu_usuario, sua_senha e sua-chave-secreta-aqui para valores reais.
+⚠️ Importante: Altere seu usuario, sua senha e sua chave para valores reais.
+
+### Variáveis de Ambiente
+
+| Variável | Descrição | Padrão |
+|----------|-----------|--------|
+| `DB_NAME` | Nome do banco de dados | `monitoria_db` |
+| `DB_USER` | Usuário do banco de dados | `postgres` |
+| `DB_PASSWORD` | Senha do banco de dados | **obrigatório** |
+| `JWT_SECRET` | Chave secreta para geração do token JWT | `12345678` |
 
 ## 🚀 Instalação e Execução
 
@@ -247,19 +215,6 @@ src/main/java/com/controle/monitoria_api/
     └── application.yml
 ```
 
-## 📚 Documentação da API
-Acesse o Swagger UI para testar todos os endpoints interativamente.
-
-### Como testar no Swagger UI
-Acesse http://localhost:8080/swagger-ui.html
-
-### Clique no botão Authorize (cadeado)
-
-- Faça login no endpoint POST /login para obter o token
-- Insira o token no formato: Bearer {seu-token}
-- Clique em Authorize
-- Agora você pode testar qualquer endpoint
-
 ## 🔐 Autenticação
 
 ### Obter um token
@@ -286,7 +241,7 @@ json
 
 ```
 curl -X GET http://localhost:8080/cursos \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  -H "Authorization: Bearer SEU_TOKEN"
 ```
 
 ## 👥 Perfis de Acesso
@@ -555,3 +510,68 @@ O professor tem acesso de **leitura** a todas as entidades e permissões especí
 
 - Matrícula do aluno deve ser **única** no sistema
 - Aluno pode ser **inativado** (soft delete), mas não excluído fisicamente
+
+---
+
+## ⚠️ Tratamento de Erros
+
+### Estrutura Padrão
+
+```
+{
+  "timestamp": "2024-01-15T10:30:00Z",
+  "status": 404,
+  "error": "Recurso não encontrado",
+  "message": "Curso com ID 999 não encontrado",
+  "path": "/cursos/999"
+}
+```
+
+### Estrutura de Validação
+
+```
+{
+  "timestamp": "2024-01-15T10:30:00Z",
+  "status": 422,
+  "error": "Dados inválidos!",
+  "message": "Um ou mais campos estão inválidos!",
+  "path": "/alunos",
+  "erros": [
+    {
+      "fieldName": "matricula",
+      "message": "Matrícula já cadastrada!"
+    }
+  ]
+}
+```
+
+### Códigos de Erro
+
+| Status | Descrição |
+|--------|-----------|
+| 200 | Sucesso |
+| 201 | Criado |
+| 204 | Sem conteúdo |
+| 400 | Requisição inválida |
+| 401 | Não autorizado |
+| 403 | Acesso negado |
+| 404 | Não encontrado |
+| 422 | Erro de validação |
+| 500 | Erro interno |
+
+---
+
+## 📚 Documentação da API
+
+A documentação interativa está disponível no **Swagger UI**:
+
+http://localhost:8080/swagger-ui.html
+
+### Como testar
+
+1. Acesse o Swagger UI
+2. Clique no botão **Authorize** (cadeado)
+3. Faça login no endpoint `POST /login` e copie o token retornado
+4. Insira o token no formato: `Bearer {seu-token}`
+5. Clique em **Authorize**
+6. Agora você pode testar qualquer endpoint protegido
