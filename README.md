@@ -39,6 +39,12 @@ API para gerenciamento de monitoria acadêmica, permitindo o controle de:
 
 ---
 
+## 🧩 Diagrama de Classes
+
+![Diagrama de Classes](docs/diagrama-classes.png)
+
+---
+
 ## 🛠️ Tecnologias
 
 | Tecnologia | Versão |
