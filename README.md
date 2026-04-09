@@ -7,6 +7,7 @@ API RESTful para gerenciamento completo de monitoria acadêmica, desenvolvida co
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17%2B-blue.svg)](https://www.postgresql.org/)
 [![JWT](https://img.shields.io/badge/JWT-Authentication-orange.svg)](https://jwt.io/)
 [![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-green.svg)](https://swagger.io/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
 
 ---
 
@@ -16,7 +17,8 @@ API RESTful para gerenciamento completo de monitoria acadêmica, desenvolvida co
 - [Tecnologias](#tecnologias)
 - [Pré-requisitos](#pré-requisitos)
 - [Configuração](#configuração)
-- [Instalação e Execução](#instalação-e-execução)
+- [Execução com Docker](#execução-com-docker)
+- [Execução Local](#execução-local)
 - [Estrutura do Projeto](#estrutura-do-projeto)
 - [Autenticação](#autenticação)
 - [Perfis de Acesso](#perfis-de-acesso)
@@ -58,14 +60,14 @@ API para gerenciamento de monitoria acadêmica, permitindo o controle de:
 | JWT | 4.2.1 |
 | Lombok | 1.18.44 |
 | SpringDoc OpenAPI | 3.0.2 |
+| Docker | 24+ |
 
 ---
 
 ## 📦 Pré-requisitos
 
-- Java 21
-- PostgreSQL 15+
-- Maven 3.8+
+- Docker e Docker Compose (recomendado)
+- ou Java 21, Maven 3.8+ e PostgreSQL 15+ (para execução local)
 
 ---
 
@@ -85,6 +87,8 @@ CREATE DATABASE monitoria_db;
 spring:
   application:
     name: monitoria-api
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:default}
 
   datasource:
     url: jdbc:postgresql://localhost:5432/${DB_NAME:monitoria_db}
@@ -108,6 +112,64 @@ api:
 
 ⚠️ Importante: Altere seu usuario, sua senha e sua chave para valores reais.
 
+---
+
+## 🐳 Execução com Docker
+
+Esta é a forma recomendada para executar o projeto.
+
+### Estrutura Docker
+
+```
+monitoria-api/
+├── Dockerfile
+├── docker-compose.yml
+├── .dockerignore
+└── src/
+```
+
+### Comandos
+
+```
+# Subir os containers
+docker-compose up -d
+
+# Ver logs da aplicação
+docker-compose logs -f app
+
+# Parar os containers
+docker-compose down
+
+# Reconstruir após alterações
+docker-compose up --build -d
+```
+
+### Containers
+
+| Container | Porta | Descrição |
+|-----------|-------|-----------|
+| `monitoria-api` | 8080 | API Spring Boot |
+| `monitoria-postgres` | 5432 | PostgreSQL |
+| `monitoria-pgadmin` | 5050 | PgAdmin (opcional) |
+
+### Acessos
+
+| Serviço | URL | Login/Senha |
+|---------|-----|-------------|
+| API | `http://localhost:8080` | - |
+| Swagger UI | `http://localhost:8080/swagger-ui.html` | - |
+| PgAdmin | `http://localhost:5050` | `admin@admin.com` / `admin123` |
+| PostgreSQL | `localhost:5432` | `postgres` / `postgres` |
+
+### Usuários Padrão
+
+Os seguintes usuários são criados **automaticamente** na primeira execução:
+
+| Login | Senha | Perfil |
+|-------|-------|--------|
+| `admin` | `admin123` | ADMIN |
+| `professor` | `prof123` | PROFESSOR |
+
 ### Variáveis de Ambiente
 
 | Variável | Descrição | Padrão |
@@ -117,7 +179,9 @@ api:
 | `DB_PASSWORD` | Senha do banco de dados | **obrigatório** |
 | `JWT_SECRET` | Chave secreta para geração do token JWT | `12345678` |
 
-## 🚀 Instalação e Execução
+---
+
+## 🚀 Execução Local
 
 ### Clone o repositório
 
@@ -139,6 +203,9 @@ cd monitoria-api
 java -jar target/monitoria-api-0.0.1-SNAPSHOT.jar
 ```
 
+---
+
+
 ## Acesse a aplicação
 
 
@@ -158,6 +225,7 @@ src/main/java/com/controle/monitoria_api/
 ├── MonitoriaApiApplication.java
 │
 ├── config/
+|   ├──  DataInitializer.java  
 │   ├── OpenAPIConfiguration.java
 │   └── SecurityConfiguration.java
 │
@@ -211,7 +279,7 @@ src/main/java/com/controle/monitoria_api/
 │       └── DadosTokenJWT.java
 │
 ├── exceptions/
-│   ├── ErgoResponseBuilder.java
+│   ├── ErroResponseBuilder.java
 │   ├── FieldMessage.java
 │   ├── GlobalExceptionHandler.java
 │   ├── StandardError.java
