@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -77,8 +78,7 @@ public class MatrizCurricularController {
             @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso"),
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
-    public ResponseEntity<Page<MatrizCurricularResponseDTO>> listarTodos(
-            @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<MatrizCurricularResponseDTO>> listarTodos(@ParameterObject @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarTodos(paginacao);
         return ResponseEntity.ok(page);
     }
@@ -93,8 +93,7 @@ public class MatrizCurricularController {
             @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso"),
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
-    public ResponseEntity<Page<MatrizCurricularResponseDTO>> listarAtivos(
-            @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<MatrizCurricularResponseDTO>> listarAtivos(@ParameterObject @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarAtivos(paginacao);
         return ResponseEntity.ok(page);
     }
@@ -109,8 +108,7 @@ public class MatrizCurricularController {
             @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso"),
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
-    public ResponseEntity<Page<MatrizCurricularResponseDTO>> listarInativos(
-            @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<MatrizCurricularResponseDTO>> listarInativos(@ParameterObject @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarInativos(paginacao);
         return ResponseEntity.ok(page);
     }
@@ -126,9 +124,7 @@ public class MatrizCurricularController {
             @ApiResponse(responseCode = "401", description = "Não autorizado"),
             @ApiResponse(responseCode = "404", description = "Curso não encontrado")
     })
-    public ResponseEntity<Page<MatrizCurricularResponseDTO>> listarPorCurso(
-            @PathVariable Long cursoId,
-            @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<MatrizCurricularResponseDTO>> listarPorCurso(@PathVariable Long cursoId, @ParameterObject @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarPorCurso(cursoId, paginacao);
         return ResponseEntity.ok(page);
     }

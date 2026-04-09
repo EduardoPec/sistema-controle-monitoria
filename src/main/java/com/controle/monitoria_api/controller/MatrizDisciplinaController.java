@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -85,8 +86,7 @@ public class MatrizDisciplinaController {
             @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso"),
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
-    public ResponseEntity<Page<MatrizDisciplinaResponseDTO>> listarTodos(
-            @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<MatrizDisciplinaResponseDTO>> listarTodos(@ParameterObject @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarTodos(paginacao);
         return ResponseEntity.ok(page);
     }
@@ -107,7 +107,7 @@ public class MatrizDisciplinaController {
             @ApiResponse(responseCode = "401", description = "Não autorizado"),
             @ApiResponse(responseCode = "404", description = "Matriz curricular não encontrada")
     })
-    public ResponseEntity<Page<MatrizDisciplinaResponseDTO>> listarPorMatriz(@PathVariable Long matrizId, @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<MatrizDisciplinaResponseDTO>> listarPorMatriz(@PathVariable Long matrizId, @ParameterObject @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarPorMatriz(matrizId, paginacao);
         return ResponseEntity.ok(page);
     }
@@ -127,7 +127,7 @@ public class MatrizDisciplinaController {
             @ApiResponse(responseCode = "401", description = "Não autorizado"),
             @ApiResponse(responseCode = "404", description = "Disciplina não encontrada")
     })
-    public ResponseEntity<Page<MatrizDisciplinaResponseDTO>> listarPorDisciplina(@PathVariable Long disciplinaId, @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<MatrizDisciplinaResponseDTO>> listarPorDisciplina(@PathVariable Long disciplinaId, @ParameterObject @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarPorDisciplina(disciplinaId, paginacao);
         return ResponseEntity.ok(page);
     }

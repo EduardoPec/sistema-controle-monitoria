@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -70,7 +71,7 @@ public class FormacaoController {
             @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso"),
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
-    public ResponseEntity<Page<FormacaoResponseDTO>> listarTodos(@PageableDefault(size = 10, sort = {"titulacao"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<FormacaoResponseDTO>> listarTodos(@ParameterObject @PageableDefault(size = 10, sort = {"titulacao"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarTodos(paginacao);
         return ResponseEntity.ok(page);
     }
@@ -86,7 +87,7 @@ public class FormacaoController {
             @ApiResponse(responseCode = "401", description = "Não autorizado"),
             @ApiResponse(responseCode = "404", description = "Professor não encontrado")
     })
-    public ResponseEntity<Page<FormacaoResponseDTO>> listarPorProfessor(@PathVariable Long professorId, @PageableDefault(size = 10, sort = {"titulacao"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<FormacaoResponseDTO>> listarPorProfessor(@ParameterObject @PathVariable Long professorId, @PageableDefault(size = 10, sort = {"titulacao"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarPorProfessor(professorId, paginacao);
         return ResponseEntity.ok(page);
     }
