@@ -1,6 +1,8 @@
 spring:
   application:
     name: monitoria-api
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:default}
 
   datasource:
     url: jdbc:postgresql://localhost:5432/${DB_NAME:monitoria_db}

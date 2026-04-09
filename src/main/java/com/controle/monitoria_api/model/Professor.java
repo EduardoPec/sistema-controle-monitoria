@@ -3,10 +3,7 @@ package com.controle.monitoria_api.model;
 import com.controle.monitoria_api.model.dto.request.professor.ProfessorAtualizacaoDTO;
 import com.controle.monitoria_api.model.dto.request.professor.ProfessorCriacaoDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -15,6 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @EqualsAndHashCode(of = "id")
 public class Professor {
 
