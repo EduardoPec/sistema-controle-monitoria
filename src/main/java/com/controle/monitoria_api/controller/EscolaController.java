@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -76,7 +77,7 @@ public class EscolaController {
             @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso"),
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
-    public ResponseEntity<Page<EscolaResponseDTO>> listarTodos(@PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<EscolaResponseDTO>> listarTodos(@ParameterObject @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarTodos(paginacao);
         return ResponseEntity.ok(page);
     }
@@ -91,7 +92,7 @@ public class EscolaController {
             @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso"),
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
-    public ResponseEntity<Page<EscolaResponseDTO>> listarAtivos(@PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<EscolaResponseDTO>> listarAtivos(@ParameterObject @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarAtivos(paginacao);
         return ResponseEntity.ok(page);
     }
@@ -106,7 +107,7 @@ public class EscolaController {
             @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso"),
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
-    public ResponseEntity<Page<EscolaResponseDTO>> listarInativos(@PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<EscolaResponseDTO>> listarInativos(@ParameterObject @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarInativos(paginacao);
         return ResponseEntity.ok(page);
     }
@@ -122,7 +123,7 @@ public class EscolaController {
             @ApiResponse(responseCode = "401", description = "Não autorizado"),
             @ApiResponse(responseCode = "404", description = "IES não encontrada")
     })
-    public ResponseEntity<Page<EscolaResponseDTO>> listarPorIES(@PathVariable Long iesId, @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<EscolaResponseDTO>> listarPorIES(@ParameterObject @PathVariable Long iesId, @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarPorIES(iesId, paginacao);
         return ResponseEntity.ok(page);
     }

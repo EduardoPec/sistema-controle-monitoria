@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -65,21 +66,21 @@ public class AlunoController {
             @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso"),
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
-    public ResponseEntity<Page<AlunoResponseDTO>> listarTodos(@PageableDefault(size = 10, sort = {"nomeCompleto"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<AlunoResponseDTO>> listarTodos(@ParameterObject @PageableDefault(size = 10, sort = {"nomeCompleto"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarTodos(paginacao);
         return ResponseEntity.ok(page);
     }
 
     @GetMapping("/ativos")
     @Operation(summary = "Listar alunos ativos", description = "Retorna apenas os alunos com status ATIVO.")
-    public ResponseEntity<Page<AlunoResponseDTO>> listarAtivos(@PageableDefault(size = 10, sort = {"nomeCompleto"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<AlunoResponseDTO>> listarAtivos(@ParameterObject @PageableDefault(size = 10, sort = {"nomeCompleto"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarAtivos(paginacao);
         return ResponseEntity.ok(page);
     }
 
     @GetMapping("/inativos")
     @Operation(summary = "Listar alunos inativos", description = "Retorna apenas os alunos com status INATIVO.")
-    public ResponseEntity<Page<AlunoResponseDTO>> listarInativos(@PageableDefault(size = 10, sort = {"nomeCompleto"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<AlunoResponseDTO>> listarInativos(@ParameterObject @PageableDefault(size = 10, sort = {"nomeCompleto"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarInativos(paginacao);
         return ResponseEntity.ok(page);
     }

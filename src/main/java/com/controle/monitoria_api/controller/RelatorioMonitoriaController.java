@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -73,7 +74,7 @@ public class RelatorioMonitoriaController {
             @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso"),
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
-    public ResponseEntity<Page<RelatorioMonitoriaResponseDTO>> listarTodos(@PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.DESC) Pageable paginacao) {
+    public ResponseEntity<Page<RelatorioMonitoriaResponseDTO>> listarTodos(@ParameterObject @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.DESC) Pageable paginacao) {
         var page = service.listarTodos(paginacao);
         return ResponseEntity.ok(page);
     }
@@ -89,7 +90,7 @@ public class RelatorioMonitoriaController {
             @ApiResponse(responseCode = "401", description = "Não autorizado"),
             @ApiResponse(responseCode = "404", description = "Professor não encontrado")
     })
-    public ResponseEntity<Page<RelatorioMonitoriaResponseDTO>> listarPorProfessor(@PathVariable Long professorId, @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<RelatorioMonitoriaResponseDTO>> listarPorProfessor(@PathVariable Long professorId, @ParameterObject @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarPorProfessor(professorId, paginacao);
         return ResponseEntity.ok(page);
     }
@@ -105,7 +106,7 @@ public class RelatorioMonitoriaController {
             @ApiResponse(responseCode = "401", description = "Não autorizado"),
             @ApiResponse(responseCode = "404", description = "Disciplina não encontrada")
     })
-    public ResponseEntity<Page<RelatorioMonitoriaResponseDTO>> listarPorDisciplina(@PathVariable Long disciplinaId, @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<RelatorioMonitoriaResponseDTO>> listarPorDisciplina(@PathVariable Long disciplinaId, @ParameterObject @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarPorDisciplina(disciplinaId, paginacao);
         return ResponseEntity.ok(page);
     }
@@ -121,7 +122,7 @@ public class RelatorioMonitoriaController {
             @ApiResponse(responseCode = "401", description = "Não autorizado"),
             @ApiResponse(responseCode = "404", description = "Aluno não encontrado")
     })
-    public ResponseEntity<Page<RelatorioMonitoriaResponseDTO>> listarPorAluno(@PathVariable Long alunoId, @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<RelatorioMonitoriaResponseDTO>> listarPorAluno(@PathVariable Long alunoId, @ParameterObject @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarPorAluno(alunoId, paginacao);
         return ResponseEntity.ok(page);
     }
@@ -139,7 +140,7 @@ public class RelatorioMonitoriaController {
             @ApiResponse(responseCode = "400", description = "Formato de semestre inválido"),
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
-    public ResponseEntity<Page<RelatorioMonitoriaResponseDTO>> listarPorSemestre(@PathVariable String semestre, @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<RelatorioMonitoriaResponseDTO>> listarPorSemestre(@PathVariable String semestre, @ParameterObject @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarPorSemestre(semestre, paginacao);
         return ResponseEntity.ok(page);
     }
@@ -160,7 +161,7 @@ public class RelatorioMonitoriaController {
             @ApiResponse(responseCode = "400", description = "Status inválido"),
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
-    public ResponseEntity<Page<RelatorioMonitoriaResponseDTO>> listarPorStatusMonitoria(@PathVariable String status, @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.ASC) Pageable paginacao) {
+    public ResponseEntity<Page<RelatorioMonitoriaResponseDTO>> listarPorStatusMonitoria(@PathVariable String status, @ParameterObject @PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         var page = service.listarPorStatusMonitoria(status, paginacao);
         return ResponseEntity.ok(page);
     }
