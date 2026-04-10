@@ -1,6 +1,7 @@
 package com.controle.monitoria_api.security;
 
 import com.controle.monitoria_api.repository.UsuarioRepository;
+import com.controle.monitoria_api.service.exceptions.ValidacaoException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +28,8 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         if (tokenJWT != null) {
             var subject = tokenService.getSubject(tokenJWT);
-            var usuario = repository.findByLogin(subject);
+            var usuario = repository.findByLoginIgnoreCase(subject)
+                    .orElseThrow(() -> new ValidacaoException("Usuário não encontrado!"));
 
             var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);

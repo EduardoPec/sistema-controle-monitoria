@@ -17,7 +17,7 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if (usuarioRepository.findByLogin("admin") == null) {
+        if (usuarioRepository.findByLoginIgnoreCase("admin").isEmpty()) {
             Usuario admin = new Usuario();
             admin.setLogin("admin");
             admin.setSenha(passwordEncoder.encode("admin123"));
@@ -27,7 +27,7 @@ public class DataInitializer implements CommandLineRunner {
             System.out.println("Usuário (ADMIN) criado com sucesso!");
         }
 
-        if (usuarioRepository.findByLogin("professor") == null) {
+        if (usuarioRepository.findByLoginIgnoreCase("professor").isEmpty()) {
             Usuario professor = new Usuario();
             professor.setLogin("professor");
             professor.setSenha(passwordEncoder.encode("prof123"));
