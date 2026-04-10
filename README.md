@@ -1,6 +1,5 @@
 # Sistema de Controle de Monitoria de Alunos
 
-
 API RESTful para gerenciamento completo de monitoria acadêmica, desenvolvida com **Java Spring Boot**. O sistema permite o cadastro e controle de IES, escolas, cursos, disciplinas, matrizes curriculares, professores, alunos e monitorias.
 
 [![Java](https://img.shields.io/badge/Java-21-blue.svg)](https://www.oracle.com/java/)
@@ -8,7 +7,6 @@ API RESTful para gerenciamento completo de monitoria acadêmica, desenvolvida co
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17%2B-blue.svg)](https://www.postgresql.org/)
 [![JWT](https://img.shields.io/badge/JWT-Authentication-orange.svg)](https://jwt.io/)
 [![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-green.svg)](https://swagger.io/)
-[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
 
 ---
@@ -16,19 +14,6 @@ API RESTful para gerenciamento completo de monitoria acadêmica, desenvolvida co
 ## 📋 Índice
 
 - [Sobre o Projeto](#sobre-o-projeto)
-- [Tecnologias](#tecnologias)
-- [Pré-requisitos](#pré-requisitos)
-- [Configuração](#configuração)
-- [Instalação e Execução](#instalação-e-execução)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Autenticação](#autenticação)
-- [Perfis de Acesso](#perfis-de-acesso)
-- [Endpoints](#endpoints)
-- [Regras de Negócio](#regras-de-negócio)
-- [Tratamento de Erros](#tratamento-de-erros)
-- [Documentação da API](#documentação-da-api)
-- [Funcionalidades por Perfil](#funcionalidades-por-perfil)
-- [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Tecnologias](#tecnologias)
 - [Pré-requisitos](#pré-requisitos)
 - [Configuração](#configuração)
@@ -75,86 +60,12 @@ API para gerenciamento de monitoria acadêmica, permitindo o controle de:
 | JWT | 4.2.1 |
 | Lombok | 1.18.44 |
 | SpringDoc OpenAPI | 3.0.2 |
-
-Este projeto é uma API backend para gerenciamento de monitoria acadêmica, desenvolvida como parte de um projeto acadêmico. O sistema atende às necessidades de instituições de ensino que desejam controlar todo o processo de monitoria, desde o cadastro de IES e escolas até a geração de relatórios finais.
-
----
-
-## 🛠️ Tecnologias
-
-### Perfil ADMIN (Acesso Total)
-
-O administrador tem acesso **TOTAL** a todas as operações em todas as entidades do sistema.
-
-| Funcionalidade | Operações |
-|----------------|-----------|
-| **IES** | Criar, listar, atualizar e excluir |
-| **Escolas** | Criar, listar, atualizar, ativar e inativar |
-| **Cursos** | Criar, listar, atualizar, ativar e inativar |
-| **Disciplinas** | Criar, listar, atualizar, ativar e inativar |
-| **Matrizes Curriculares** | Criar, listar, atualizar, ativar e inativar |
-| **Matrizes-Disciplinas** | Criar, listar, atualizar e excluir |
-| **Professores** | Criar, listar, atualizar, ativar e inativar |
-| **Alunos** | Criar, listar, atualizar, ativar e inativar |
-| **Formações** | Criar, listar, atualizar e excluir |
-| **Monitorias** | Criar, listar, atualizar e finalizar |
-| **Relatórios** | Criar, listar e visualizar |
-
-### Perfil PROFESSOR (Acesso Restrito)
-
-O professor tem acesso de **LEITURA** a todas as entidades + operações específicas para seu trabalho.
-
-| Funcionalidade | Operações |
-|----------------|-----------|
-| **IES** | Apenas leitura (listar) |
-| **Escolas** | Apenas leitura (listar) |
-| **Cursos** | Apenas leitura (listar) |
-| **Disciplinas** | Apenas leitura (listar) |
-| **Matrizes Curriculares** | Apenas leitura (listar) |
-| **Matrizes-Disciplinas** | Apenas leitura (listar) |
-| **Professores** | Apenas leitura (listar) |
-| **Alunos** | Criar e listar |
-| **Formações** | Criar, listar e atualizar (próprias formações) |
-| **Monitorias** | Criar, listar e finalizar |
-| **Relatórios** | Criar e listar |
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-| Tecnologia | Versão | Descrição |
-|------------|--------|-----------|
-| **Java** | 21 | Linguagem de programação |
-| **Spring Boot** | 4.0.5 | Framework principal |
-| **Spring Security** | 7.0.4 | Autenticação e autorização |
-| **Spring Data JPA** | 4.0.4 | Persistência de dados |
-| **PostgreSQL** | 17+ | Banco de dados relacional |
-| **Hibernate** | 7.2.7 | ORM (Object-Relational Mapping) |
-| **JWT (java-jwt)** | 4.2.1 | Tokens de autenticação |
-| **Lombok** | 1.18.44 | Redução de código boilerplate |
-| **SpringDoc OpenAPI** | 3.0.2 | Documentação interativa da API |
-| **Maven** | - | Gerenciador de dependências |
-
-| Tecnologia | Versão |
-|------------|--------|
-| Java | 21 |
-| Spring Boot | 4.0.5 |
-| Spring Security | 7.0.4 |
-| Spring Data JPA | 4.0.4 |
-| PostgreSQL | 17+ |
-| Hibernate | 7.2.7 |
-| JWT | 4.2.1 |
-| Lombok | 1.18.44 |
-| SpringDoc OpenAPI | 3.0.2 |
 | Docker | 24+ |
 
 ---
 
 ## 📦 Pré-requisitos
 
-- Java 21
-- PostgreSQL 15+
-- Maven 3.8+
 - Docker e Docker Compose (recomendado)
 - ou Java 21, Maven 3.8+ e PostgreSQL 15+ (para execução local)
 
@@ -164,31 +75,11 @@ O professor tem acesso de **LEITURA** a todas as entidades + operações especí
 
 ### Banco de Dados
 
-| Ferramenta | Versão | Comando para verificar |
-|------------|--------|------------------------|
-| **Java JDK** | 21 | `java -version` |
-| **PostgreSQL** | 15 ou superior | `psql --version` |
-| **Maven** | 3.8+ | `mvn -version` |
-
-- Java 21
-- PostgreSQL 15+
-- Maven 3.8+
-
----
-
-## ⚙️ Configuração
-
-### Crie o banco de dados PostgreSQL
-
-### Banco de Dados
-
 ```sql
 CREATE DATABASE monitoria_db;
 ```
 
 ---
-
-## ⚙️ Configuração da Aplicação
 
 ### application.yml
 
@@ -220,8 +111,6 @@ api:
 ```
 
 ⚠️ Importante: Altere seu usuario, sua senha e sua chave para valores reais.
-
----
 
 ## 🐳 Execução com Docker
 
@@ -288,10 +177,6 @@ Os seguintes usuários são criados **automaticamente** na primeira execução:
 | `DB_PASSWORD` | Senha do banco de dados | **obrigatório** |
 | `JWT_SECRET` | Chave secreta para geração do token JWT | `12345678` |
 
-⚠️ Importante: Altere seu_usuario, sua_senha e sua-chave-secreta-aqui para valores reais.
-
----
-
 ## 🚀 Execução Local
 
 ### Clone o repositório
@@ -314,9 +199,6 @@ cd monitoria-api
 java -jar target/monitoria-api-0.0.1-SNAPSHOT.jar
 ```
 
----
-
-
 ## Acesse a aplicação
 
 
@@ -336,7 +218,7 @@ src/main/java/com/controle/monitoria_api/
 ├── MonitoriaApiApplication.java
 │
 ├── config/
-|   ├──  DataInitializer.java  
+|   ├── DataInitializer.java  
 │   ├── OpenAPIConfiguration.java
 │   └── SecurityConfiguration.java
 │
@@ -400,19 +282,6 @@ src/main/java/com/controle/monitoria_api/
     └── application.yml
 ```
 
-## 📚 Documentação da API
-Acesse o Swagger UI para testar todos os endpoints interativamente.
-
-### Como testar no Swagger UI
-Acesse http://localhost:8080/swagger-ui.html
-
-### Clique no botão Authorize (cadeado)
-
-- Faça login no endpoint POST /login para obter o token
-- Insira o token no formato: Bearer {seu-token}
-- Clique em Authorize
-- Agora você pode testar qualquer endpoint
-
 ## 🔐 Autenticação
 
 ### Obter um token
@@ -439,8 +308,6 @@ json
 
 ```
 curl -X GET http://localhost:8080/cursos \
-  -H "Authorization: Bearer SEU_TOKEN"
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
   -H "Authorization: Bearer SEU_TOKEN"
 ```
 
@@ -747,7 +614,7 @@ O professor tem acesso de **leitura** a todas as entidades e permissões especí
 
 ### Códigos de Erro
 
-| Status | Descrição | 
+| Status | Descrição |
 |--------|-----------|
 | 200 | Sucesso |
 | 201 | Criado |
