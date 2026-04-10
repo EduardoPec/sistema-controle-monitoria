@@ -1,12 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 # Sistema de Controle de Monitoria de Alunos
-=======
-# 🎓 Sistema de Controle de Monitoria de Alunos - Backend
->>>>>>> 44190dc (Update README.md)
-=======
-# Sistema de Controle de Monitoria de Alunos
->>>>>>> ff765e3 (Update README.md)
+
 
 API RESTful para gerenciamento completo de monitoria acadêmica, desenvolvida com **Java Spring Boot**. O sistema permite o cadastro e controle de IES, escolas, cursos, disciplinas, matrizes curriculares, professores, alunos e monitorias.
 
@@ -15,21 +8,14 @@ API RESTful para gerenciamento completo de monitoria acadêmica, desenvolvida co
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17%2B-blue.svg)](https://www.postgresql.org/)
 [![JWT](https://img.shields.io/badge/JWT-Authentication-orange.svg)](https://jwt.io/)
 [![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-green.svg)](https://swagger.io/)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
->>>>>>> 44190dc (Update README.md)
-=======
->>>>>>> ff765e3 (Update README.md)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
 
 ---
 
 ## 📋 Índice
 
 - [Sobre o Projeto](#sobre-o-projeto)
-<<<<<<< HEAD
-<<<<<<< HEAD
 - [Tecnologias](#tecnologias)
 - [Pré-requisitos](#pré-requisitos)
 - [Configuração](#configuração)
@@ -41,35 +27,25 @@ API RESTful para gerenciamento completo de monitoria acadêmica, desenvolvida co
 - [Regras de Negócio](#regras-de-negócio)
 - [Tratamento de Erros](#tratamento-de-erros)
 - [Documentação da API](#documentação-da-api)
-=======
 - [Funcionalidades por Perfil](#funcionalidades-por-perfil)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
-=======
 - [Tecnologias](#tecnologias)
->>>>>>> ff765e3 (Update README.md)
 - [Pré-requisitos](#pré-requisitos)
 - [Configuração](#configuração)
-- [Instalação e Execução](#instalação-e-execução)
+- [Execução com Docker](#execução-com-docker)
+- [Execução Local](#execução-local)
 - [Estrutura do Projeto](#estrutura-do-projeto)
 - [Autenticação](#autenticação)
 - [Perfis de Acesso](#perfis-de-acesso)
 - [Endpoints](#endpoints)
 - [Regras de Negócio](#regras-de-negócio)
-<<<<<<< HEAD
->>>>>>> 44190dc (Update README.md)
-=======
 - [Tratamento de Erros](#tratamento-de-erros)
 - [Documentação da API](#documentação-da-api)
->>>>>>> ff765e3 (Update README.md)
 
 ---
 
 ## 📖 Sobre o Projeto
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> ff765e3 (Update README.md)
 API para gerenciamento de monitoria acadêmica, permitindo o controle de:
 
 - Instituições de Ensino Superior (IES)
@@ -77,7 +53,6 @@ API para gerenciamento de monitoria acadêmica, permitindo o controle de:
 - Matrizes Curriculares e Pré-requisitos
 - Professores e Alunos
 - Monitorias e Relatórios
-<<<<<<< HEAD
 
 ---
 
@@ -100,16 +75,13 @@ API para gerenciamento de monitoria acadêmica, permitindo o controle de:
 | JWT | 4.2.1 |
 | Lombok | 1.18.44 |
 | SpringDoc OpenAPI | 3.0.2 |
-=======
+
 Este projeto é uma API backend para gerenciamento de monitoria acadêmica, desenvolvida como parte de um projeto acadêmico. O sistema atende às necessidades de instituições de ensino que desejam controlar todo o processo de monitoria, desde o cadastro de IES e escolas até a geração de relatórios finais.
-=======
->>>>>>> ff765e3 (Update README.md)
 
 ---
 
 ## 🛠️ Tecnologias
 
-<<<<<<< HEAD
 ### Perfil ADMIN (Acesso Total)
 
 O administrador tem acesso **TOTAL** a todas as operações em todas as entidades do sistema.
@@ -162,8 +134,7 @@ O professor tem acesso de **LEITURA** a todas as entidades + operações especí
 | **Lombok** | 1.18.44 | Redução de código boilerplate |
 | **SpringDoc OpenAPI** | 3.0.2 | Documentação interativa da API |
 | **Maven** | - | Gerenciador de dependências |
->>>>>>> 44190dc (Update README.md)
-=======
+
 | Tecnologia | Versão |
 |------------|--------|
 | Java | 21 |
@@ -175,45 +146,41 @@ O professor tem acesso de **LEITURA** a todas as entidades + operações especí
 | JWT | 4.2.1 |
 | Lombok | 1.18.44 |
 | SpringDoc OpenAPI | 3.0.2 |
->>>>>>> ff765e3 (Update README.md)
+| Docker | 24+ |
 
 ---
 
 ## 📦 Pré-requisitos
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 - Java 21
 - PostgreSQL 15+
 - Maven 3.8+
+- Docker e Docker Compose (recomendado)
+- ou Java 21, Maven 3.8+ e PostgreSQL 15+ (para execução local)
 
 ---
 
 ## ⚙️ Configuração
 
 ### Banco de Dados
-=======
+
 | Ferramenta | Versão | Comando para verificar |
 |------------|--------|------------------------|
 | **Java JDK** | 21 | `java -version` |
 | **PostgreSQL** | 15 ou superior | `psql --version` |
 | **Maven** | 3.8+ | `mvn -version` |
-=======
+
 - Java 21
 - PostgreSQL 15+
 - Maven 3.8+
->>>>>>> ff765e3 (Update README.md)
 
 ---
 
 ## ⚙️ Configuração
 
-<<<<<<< HEAD
 ### Crie o banco de dados PostgreSQL
->>>>>>> 44190dc (Update README.md)
-=======
+
 ### Banco de Dados
->>>>>>> ff765e3 (Update README.md)
 
 ```sql
 CREATE DATABASE monitoria_db;
@@ -221,20 +188,16 @@ CREATE DATABASE monitoria_db;
 
 ---
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 ## ⚙️ Configuração da Aplicação
 
->>>>>>> 44190dc (Update README.md)
-=======
->>>>>>> ff765e3 (Update README.md)
 ### application.yml
 
 ```yaml
 spring:
   application:
     name: monitoria-api
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:default}
 
   datasource:
     url: jdbc:postgresql://localhost:5432/${DB_NAME:monitoria_db}
@@ -256,11 +219,65 @@ api:
       secret: ${JWT_SECRET:12345678}
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> ff765e3 (Update README.md)
 ⚠️ Importante: Altere seu usuario, sua senha e sua chave para valores reais.
+
+---
+
+## 🐳 Execução com Docker
+
+Esta é a forma recomendada para executar o projeto.
+
+### Estrutura Docker
+
+```
+monitoria-api/
+├── Dockerfile
+├── docker-compose.yml
+├── .dockerignore
+└── src/
+```
+
+### Comandos
+
+```
+# Subir os containers
+docker-compose up -d
+
+# Ver logs da aplicação
+docker-compose logs -f app
+
+# Parar os containers
+docker-compose down
+
+# Reconstruir após alterações
+docker-compose up --build -d
+```
+
+### Containers
+
+| Container | Porta | Descrição |
+|-----------|-------|-----------|
+| `monitoria-api` | 8080 | API Spring Boot |
+| `monitoria-postgres` | 5432 | PostgreSQL |
+| `monitoria-pgadmin` | 5050 | PgAdmin (opcional) |
+
+### Acessos
+
+| Serviço | URL | Login/Senha |
+|---------|-----|-------------|
+| API | `http://localhost:8080` | - |
+| Swagger UI | `http://localhost:8080/swagger-ui.html` | - |
+| PgAdmin | `http://localhost:5050` | `admin@admin.com` / `admin123` |
+| PostgreSQL | `localhost:5432` | `postgres` / `postgres` |
+
+### Usuários Padrão
+
+Os seguintes usuários são criados **automaticamente** na primeira execução:
+
+| Login | Senha | Perfil |
+|-------|-------|--------|
+| `admin` | `admin123` | ADMIN |
+| `professor` | `prof123` | PROFESSOR |
 
 ### Variáveis de Ambiente
 
@@ -270,14 +287,12 @@ api:
 | `DB_USER` | Usuário do banco de dados | `postgres` |
 | `DB_PASSWORD` | Senha do banco de dados | **obrigatório** |
 | `JWT_SECRET` | Chave secreta para geração do token JWT | `12345678` |
-<<<<<<< HEAD
-=======
-⚠️ Importante: Altere seu_usuario, sua_senha e sua-chave-secreta-aqui para valores reais.
->>>>>>> 44190dc (Update README.md)
-=======
->>>>>>> ff765e3 (Update README.md)
 
-## 🚀 Instalação e Execução
+⚠️ Importante: Altere seu_usuario, sua_senha e sua-chave-secreta-aqui para valores reais.
+
+---
+
+## 🚀 Execução Local
 
 ### Clone o repositório
 
@@ -299,6 +314,9 @@ cd monitoria-api
 java -jar target/monitoria-api-0.0.1-SNAPSHOT.jar
 ```
 
+---
+
+
 ## Acesse a aplicação
 
 
@@ -318,6 +336,7 @@ src/main/java/com/controle/monitoria_api/
 ├── MonitoriaApiApplication.java
 │
 ├── config/
+|   ├──  DataInitializer.java  
 │   ├── OpenAPIConfiguration.java
 │   └── SecurityConfiguration.java
 │
@@ -371,7 +390,7 @@ src/main/java/com/controle/monitoria_api/
 │       └── DadosTokenJWT.java
 │
 ├── exceptions/
-│   ├── ErgoResponseBuilder.java
+│   ├── ErroResponseBuilder.java
 │   ├── FieldMessage.java
 │   ├── GlobalExceptionHandler.java
 │   ├── StandardError.java
@@ -381,9 +400,6 @@ src/main/java/com/controle/monitoria_api/
     └── application.yml
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 ## 📚 Documentação da API
 Acesse o Swagger UI para testar todos os endpoints interativamente.
 
@@ -397,9 +413,6 @@ Acesse http://localhost:8080/swagger-ui.html
 - Clique em Authorize
 - Agora você pode testar qualquer endpoint
 
->>>>>>> 44190dc (Update README.md)
-=======
->>>>>>> ff765e3 (Update README.md)
 ## 🔐 Autenticação
 
 ### Obter um token
@@ -426,15 +439,9 @@ json
 
 ```
 curl -X GET http://localhost:8080/cursos \
-<<<<<<< HEAD
-<<<<<<< HEAD
   -H "Authorization: Bearer SEU_TOKEN"
-=======
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
->>>>>>> 44190dc (Update README.md)
-=======
   -H "Authorization: Bearer SEU_TOKEN"
->>>>>>> ff765e3 (Update README.md)
 ```
 
 ## 👥 Perfis de Acesso
@@ -703,10 +710,6 @@ O professor tem acesso de **leitura** a todas as entidades e permissões especí
 
 - Matrícula do aluno deve ser **única** no sistema
 - Aluno pode ser **inativado** (soft delete), mas não excluído fisicamente
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> ff765e3 (Update README.md)
 
 ---
 
@@ -744,7 +747,7 @@ O professor tem acesso de **leitura** a todas as entidades e permissões especí
 
 ### Códigos de Erro
 
-| Status | Descrição |
+| Status | Descrição | 
 |--------|-----------|
 | 200 | Sucesso |
 | 201 | Criado |
@@ -772,8 +775,3 @@ http://localhost:8080/swagger-ui.html
 4. Insira o token no formato: `Bearer {seu-token}`
 5. Clique em **Authorize**
 6. Agora você pode testar qualquer endpoint protegido
-<<<<<<< HEAD
-=======
->>>>>>> 44190dc (Update README.md)
-=======
->>>>>>> ff765e3 (Update README.md)
